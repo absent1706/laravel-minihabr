@@ -1,0 +1,71 @@
+/* common classes */
+
+.no-margin-vertical {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.border-transparent {
+    border-color: transparent !important;
+}
+
+/* styles for existing elements and classes */
+footer {
+    margin: 50px 0;
+}
+
+.glyphicon {
+    margin-right: 3px;
+}
+
+.navbar-toggle {
+    margin-left: 15px; /* equal to margin-right */
+}
+
+/* custom styles  */
+
+@media (max-width: 991px) {
+    .sidebar {
+        margin-top: 20px;
+    }
+}
+
+.created-date {
+    color: gray;
+}
+
+.article-title {
+    margin-top: 10px !important;
+}
+
+.article-details {
+    margin-top: 10px;
+}
+
+.glyphicon-big {
+    font-size: 1.3em;
+}
+
+.navbar-avatar {
+ padding: 7px !important;
+}
+
+.navbar .search {
+    margin: 9px;
+}
+
+
+.link-list-justified {
+    border-top: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+    padding: 5px 0;
+    margin: 5px 0 20px 0;
+}
+
+.list-inline.list-inline-dashed > li {
+  border-right: 1px solid #333;
+}
+.list-inline.list-inline-dashed > li:last-child {
+  border-right: none;
+}
+
