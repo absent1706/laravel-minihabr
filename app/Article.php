@@ -26,6 +26,13 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
+    /* for eager loading like Article::with(['commentsCount']) */
+    public function commentsCount()
+    {
+        return $this->commentsCountRelation();
+        // return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as count')
+        // ->groupBy('article_id');
+    }
 
     public function commentsCountRelation()
     {
@@ -33,6 +40,7 @@ class Article extends Model
         ->groupBy('article_id');
     }
 
+    /* for getting comments count like $article->comments_count*/
     public function getCommentsCountAttribute()
     {
         return $this->commentsCountRelation ?

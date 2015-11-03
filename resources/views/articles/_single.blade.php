@@ -28,14 +28,7 @@
   {{-- Hardcode --}}
   <ul class="list-inline list-inline-dashed article-details">
     <li><small><span class="glyphicon glyphicon-eye-open"></span>8</small></li>
-    <li><small><a href="article-1.html#comments" title="View comments"><span class="glyphicon glyphicon-comment"></span>4</a></small></li>
+    <li><small><a href="article-1.html#comments" title="View comments"><span class="glyphicon glyphicon-comment"></span>{{ $article->comments_count }}</a></small></li>
     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li>
   </ul>
 </div>
-
-{{-- temp --}}
-<ul>
-@foreach ($article->comments as $comment)
-  <li>{{ $comment->body }}</li>
-@endforeach
-</ul>
