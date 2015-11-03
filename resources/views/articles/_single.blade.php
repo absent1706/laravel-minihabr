@@ -5,7 +5,7 @@
         <img class="media-object img-rounded" src="http://lorempixel.com/20/20/people/1/">
       </a>
       <div class="media-body">
-        {{-- Hardcode --}}<a href="user-1.html">Alex</a>
+        {{-- Hardcode --}}<a href="user-1.html">{{ $article->user->name }}</a>
         <small class="created-date">{{ $article->created_at->diffForHumans() }}</small>
       </div>
     </div>
@@ -16,7 +16,7 @@
 
 
   {{-- Hardcode --}}
-  <p><small><span class="glyphicon glyphicon-th-list"></span><a href="section-1.html">Section 1</a></small></p>
+  <p><small><span class="glyphicon glyphicon-th-list"></span><a href="section-1.html">{{ $article->category->name }}</a></small></p>
 
   @if ($display_full_body)
     <p class="article-body">{{ $article->body }}</p>
