@@ -32,3 +32,10 @@
     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li>
   </ul>
 </div>
+
+{{-- temp --}}
+<ul>
+@foreach ($article->comments as $comment)
+  <li>{{ $comment->body }}</li>
+@endforeach
+</ul>

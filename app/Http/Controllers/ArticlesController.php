@@ -19,7 +19,6 @@ class ArticlesController extends Controller
      */
     public function index($scope = '')
     {
-        echo($scope);
         if     ($scope == 'most-viewed')    $articles = Article::mostViewed()->get();
         elseif ($scope == 'most-commented') $articles = Article::mostCommented()->get();
         elseif ($scope == 'most-rated')     $articles = Article::mostRated()->get();
