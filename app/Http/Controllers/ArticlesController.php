@@ -19,16 +19,14 @@ class ArticlesController extends Controller
      */
     public function index($scope = '')
     {
-        if     ($scope == 'most-viewed')    $articles = Article::mostViewed()->get();
-        elseif ($scope == 'most-commented')
-        {
-            $articles = Article::with(['user','category','commentsCount'])->get()->sortBy(function($article) {return $article->comments_count; }, null, true);
-        }
-        elseif ($scope == 'most-rated')     $articles = Article::mostRated()->get();
-        else
-        {
-            $articles = Article::with(['user'])->latest('updated_at')->paginate(3);
-        }
+        $articles = Article::with(['user','category']);
+
+        if     ($scope == 'most-viewed')    $articles = $articles->mostViewed();
+        elseif ($scope == 'most-commented') $articles = $articles->mostCommented();
+        elseif ($scope == 'most-rated')     $articles = $articles->mostRated();
+        else                                $articles = $articles->recent();
+
+        $articles = $articles->paginate(3);
 
         return view('articles.index', compact('articles', 'scope'));
     }

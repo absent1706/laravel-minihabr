@@ -26,26 +26,39 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
-    /* for eager loading like Article::with(['commentsCount']) */
-    public function commentsCount()
-    {
-        return $this->commentsCountRelation();
-        // return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as count')
-        // ->groupBy('article_id');
-    }
 
+    // /* for eager loading like Article::with(['commentsCountRelation']) */
     public function commentsCountRelation()
     {
-        return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as count')
+        // return $this->commentsCountRelation();
+        return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as comments_count')
         ->groupBy('article_id');
     }
 
-    /* for getting comments count like $article->comments_count*/
+    // public function commentsCountRelation()
+    // {
+    //     return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as count')
+    //     ->groupBy('article_id');
+    // }
+
+    // /* for getting comments count like $article->comments_count*/
     public function getCommentsCountAttribute()
     {
         return $this->commentsCountRelation ?
         $this->commentsCountRelation->count : 0;
     }
+
+    // public function likeCountRelation()
+    // {
+    //     //We use "hasOne" instead of "hasMany" because we only want to return one row.
+    //     return $this->hasOne('Like')->select(DB::raw('id, count(*) as count'))->groupBy('id');
+    // }
+
+    // //This is got via a magic method whenever you call $this->likeCount (built into Eloquent by default)
+    // public function getLikeCountAttribute()
+    // {
+    //     return $this->likeCountRelation->count;
+    // }
 
     public function scopeRecent($query)
     {
@@ -60,8 +73,10 @@ class Article extends Model
 
     public function scopeMostCommented($query)
     {
-        // HARDCODE
-        return $query->orderBy('created_at', 'desc');
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, COUNT(comments.article_id) as comments_count_aggregated'))
+            ->leftJoin('comments', 'comments.article_id' , '=', 'articles.id')
+            ->groupBy('articles.id')
+        ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(comments.article_id)'), 'desc');
     }
 
     public function scopeMostRated($query)
