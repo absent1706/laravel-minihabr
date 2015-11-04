@@ -45,7 +45,7 @@ class Article extends Model
     public function getCommentsCountAttribute()
     {
         return $this->commentsCountRelation ?
-        $this->commentsCountRelation->count : 0;
+        $this->commentsCountRelation->comments_count : 0;
     }
 
     // public function likeCountRelation()

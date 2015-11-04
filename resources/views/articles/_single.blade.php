@@ -30,7 +30,7 @@
     <li><small><span class="glyphicon glyphicon-eye-open"></span>8</small></li>
     <li><small><a href="article-1.html#comments" title="View comments"><span class="glyphicon glyphicon-comment"></span>
     {{-- when we list all posts at /articles page, we have comments_count_aggregated.
-         But on single post page, we load all comments so we get comments_count as attribute --}}
+         But on single post page, we didn't do an aggregate loading (it's no sense in it). Se we load comment_count by doing another query when  comments_count as attribute --}}
     {{ ($display_full_body) ? $article->comments_count : $article->comments_count_aggregated}}
     </a></small></li>
     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li>
