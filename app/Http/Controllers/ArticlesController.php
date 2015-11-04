@@ -19,7 +19,7 @@ class ArticlesController extends Controller
      */
     public function index($scope = '')
     {
-        $articles = Article::with(['user','category']);
+        $articles = Article::with(['user','category', 'comments']);
 
         if     ($scope == 'most-viewed')    $articles = $articles->mostViewed();
         elseif ($scope == 'most-commented') $articles = $articles->mostCommented();

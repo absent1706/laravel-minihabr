@@ -35,30 +35,12 @@ class Article extends Model
         ->groupBy('article_id');
     }
 
-    // public function commentsCountRelation()
-    // {
-    //     return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as count')
-    //     ->groupBy('article_id');
-    // }
-
     // /* for getting comments count like $article->comments_count_field*/
     public function getCommentsCountAttribute()
     {
         return $this->commentsCountRelation ?
         $this->commentsCountRelation->comments_count_field : 0;
     }
-
-    // public function likeCountRelation()
-    // {
-    //     //We use "hasOne" instead of "hasMany" because we only want to return one row.
-    //     return $this->hasOne('Like')->select(DB::raw('id, count(*) as count'))->groupBy('id');
-    // }
-
-    // //This is got via a magic method whenever you call $this->likeCount (built into Eloquent by default)
-    // public function getLikeCountAttribute()
-    // {
-    //     return $this->likeCountRelation->count;
-    // }
 
     public function scopeRecent($query)
     {
