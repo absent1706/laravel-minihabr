@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
               </button>
 
-              <a class="navbar-brand" href="index.html">MiniHabr</a>
+              <a class="navbar-brand" href="{{ route('home') }}">MiniHabr</a>
               <div class="input-group search">
                 <input type="text" class="form-control" size="50">
                 <span class="input-group-btn">
@@ -52,12 +52,13 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
 
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html" title="Home"><span class="glyphicon glyphicon-home glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Home</big></a></li>
-                <li><a href="/article/new" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
+                {{-- Show if authorized --}}
+{{--              <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ route('articles.create') }}" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
                 <li><a href="notifications.html" title="View notifications"><span class="glyphicon glyphicon-bell glyphicon-big"></span><span class="badge">2</span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Notifications</big></a></li>
 
-                <li class="dropdown">
+
+                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle navbar-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="http://lorempixel.com/36/36/people/1/" class="img-rounded">
                     <span class="caret"></span>
@@ -69,7 +70,7 @@
                     <li><a href="/session/destroy">Log out</a></li>
                   </ul>
                 </li>
-              </ul>
+              </ul>--}}
             </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
         </div>

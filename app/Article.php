@@ -26,22 +26,6 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
-
-    // /* for eager loading like Article::with(['commentsCountRelation']) */
-    public function commentsCountRelation()
-    {
-        // return $this->commentsCountRelation();
-        return $this->hasOne('App\Comment')->selectRaw('article_id, count(*) as comments_count_field')
-        ->groupBy('article_id');
-    }
-
-    // /* for getting comments count like $article->comments_count_field*/
-    public function getCommentsCountAttribute()
-    {
-        return $this->commentsCountRelation ?
-        $this->commentsCountRelation->comments_count_field : 0;
-    }
-
     public function scopeRecent($query)
     {
         return $query->orderBy('created_at', 'desc');

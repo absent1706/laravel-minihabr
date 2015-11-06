@@ -11,20 +11,16 @@
 |
 */
 
-Event::listen('illuminate.query', function($query)
-{
-    var_dump($query);
-});
+// Event::listen('illuminate.query', function($query)
+// {
+//     var_dump($query);
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('about', 'PagesController@about');
-Route::get('contact', 'PagesController@contact');
-
+Route::get('/', array( 'as' => 'home', 'uses' => 'ArticlesController@index' ));
 Route::get('articles/{scope}', 'ArticlesController@index')->where(['scope' => '(most-viewed|most-commented|most-rated)']);
 Route::resource('articles', 'ArticlesController');
 
 
-// Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController');
+
+// Route::resource('foo.bar.bez', 'Foo\Bar\BezController'); // For accessing Bez related with Foo and Bar
