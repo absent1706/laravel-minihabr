@@ -6,12 +6,10 @@
     {!! link_to_route('articles.show', $article->title, $article->id) !!}
   </h2>
 
-
-  {{-- Hardcode --}}
   <p>
     <small>
       <span class="glyphicon glyphicon-th-list"></span>
-      <a href="section-1.html">{{ $article->category->name }}</a>
+      {!! link_to_route('categories.show', $article->category->name, $article->category->id) !!}
     </small>
   </p>
 
@@ -22,9 +20,8 @@
     <a class="btn btn-default btn-xs" href="{{ route('articles.show', [$article->id]) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
   @endif
 
-  {{-- Hardcode --}}
   <ul class="list-inline list-inline-dashed article-details">
-    <li><small><span class="glyphicon glyphicon-eye-open"></span>8</small></li>
+{{--     <li><small><span class="glyphicon glyphicon-eye-open"></span>8</small></li> --}}
     <li>
       <small>
         <a href="{{ route('articles.show', [$article->id]).'#comments' }}" title="View comments">
@@ -33,6 +30,6 @@
         </a>
       </small>
     </li>
-    <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li>
+{{--     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li> --}}
   </ul>
 </div>

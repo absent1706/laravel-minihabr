@@ -90,18 +90,7 @@
 
           <!-- Blog Sidebar Widgets Column -->
           <div class="col-md-3">
-            <!-- Blog Categories Well -->
-            <div class="panel panel-default sidebar">
-              <div class="panel-heading">
-                <h4 class="panel-title">Sections</h4>
-              </div>
-              <div class="list-group">
-                <a href="section/1" class="list-group-item">Section 1</a>
-                <a href="section/2" class="list-group-item">Section 2</a>
-                <a href="section/3" class="list-group-item">Section 3</a>
-                <a href="section/4" class="list-group-item">Section 4</a>
-              </div>
-            </div>
+            @include('categories.index')
           </div>
 
         </div>

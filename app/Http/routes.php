@@ -23,4 +23,6 @@ Route::resource('articles', 'ArticlesController');
 
 Route::resource('users', 'UsersController');
 
+Route::resource('categories', 'CategoriesController', ['only' => array('show')]);
+
 // Route::resource('foo.bar.bez', 'Foo\Bar\BezController'); // For accessing Bez related with Foo and Bar

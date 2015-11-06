@@ -5,6 +5,7 @@
 <div>
   <h1>Articles</h1>
   {{-- Here we determine active scope --}}
+  {{ $scope = isset($scope) ?: '' }}
   <ul class="nav nav-pills nav-justified link-list-justified">
     <li class="{{ ($scope == '') ? 'active' : '' }}"><a href="{{ action('ArticlesController@index') }}"><span class="glyphicon glyphicon-time"></span>Recent</a></li>
     <li class="{{ ($scope == 'most-viewed') ? 'active' : '' }}"><a href="{{ action('ArticlesController@index').'/most-viewed' }}"><span class="glyphicon glyphicon-eye-open"></span>Most viewed</a></li>
