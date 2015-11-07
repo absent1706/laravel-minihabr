@@ -21,7 +21,7 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $category = Category::findOrFail($id);
-        return view('articles.index', ['articles' => $category->articles]);
+        return view('articles.index', ['articles' => $category->articles->sortByDesc('created_at')]);
     }
 
 
