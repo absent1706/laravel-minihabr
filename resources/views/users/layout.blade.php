@@ -4,7 +4,7 @@
 
 <div class="media">
     <div class="pull-left">
-        <img class="media-object img-rounded" src="http://lorempixel.com/40/40/people/1/">
+        <img class="media-object img-rounded" src="{{ Gravatar::src($user->email, 40) }}">
     </div>
     <div class="media-body">
         <h1 class="media-heading">{{ $user->name }}</h1>
