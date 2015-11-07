@@ -4,8 +4,7 @@
 
 <div>
   <h1>Articles</h1>
-  {{-- Here we determine active scope --}}
-  {{ $scope = isset($scope) ?: '' }}
+  <?php isset($scope) ?: $scope ='' ?>
   <ul class="nav nav-pills nav-justified link-list-justified">
     <li class="{{ ($scope == '') ? 'active' : '' }}"><a href="{{ action('ArticlesController@index') }}"><span class="glyphicon glyphicon-time"></span>Recent</a></li>
     <li class="{{ ($scope == 'most-viewed') ? 'active' : '' }}"><a href="{{ action('ArticlesController@index').'/most-viewed' }}"><span class="glyphicon glyphicon-eye-open"></span>Most viewed</a></li>
@@ -14,10 +13,7 @@
   </ul>
 </div>
 
-@foreach ($articles as $article)
-    @include('articles._single', ['article' => $article, 'display_full_body' => false])
-    <hr>
-@endforeach
+@include('articles._list')
 
 <!-- Pager -->
 <ul class="pager">

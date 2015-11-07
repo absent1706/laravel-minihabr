@@ -1,0 +1,22 @@
+@extends('users.layout', ['active_page' => 'comments'])
+
+@section('user_info')
+
+@if (count($user->comments))
+    @foreach ($user->comments->sortByDesc('created_at') as $comment)
+      <div class="row">
+        <div class="col-md-2">
+            {!! link_to_route('articles.show', $comment->article->title, $comment->article->id) !!}
+        </div>
+        <div class="col-md-10">
+            @include('comments._single')
+        </div>
+      </div>
+      <hr>
+    @endforeach
+@else
+    User has no comments
+@endif
+
+@stop
+

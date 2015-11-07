@@ -12,7 +12,7 @@
 
 <div id="comments">
     @foreach ($article->comments as $comment)
-        @include('comments.show')
+        @include('comments._single')
         <hr>
     @endforeach
 </div>
