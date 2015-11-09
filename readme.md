@@ -1,27 +1,57 @@
-## Laravel PHP Framework
+# Release notes
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## v0.2
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### На что стоит обратить внимание:
+1. как реализован просмотр постов и комментариев юзера (nested routes + отдельные контроллеры UserArticles, UserComments).  Так советуют гуру Ларавела.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+2. в ArticlesController и CommentsController стоит middleware на проверку, авторизован ли пользователь.
 
-## Official Documentation
+3. всё реализовано по возможности в философии rest (например, когда ты включаешь форму для создания коммента, то она лежит в файле views/comments/create.blade.php)
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-## Contributing
+### Свистелки-перделки:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+1.  (на будущее. это свистелка-перделка, но реализация интересная)
+ссылки на этой странице
+https://www.dropbox.com/s/i9ds9nbv298bcn5/%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%202015-11-09%2022.22.09.png?dl=0
 
-## Security Vulnerabilities
+содержат URL, на который мы хотим редиректнуться после авторизации. Типичный случай - хочу оставить комментарий , иду авторизовываться, а после авторизации меня возвращает не на дом. страницу, а на тот пост, откуда я ушёл.
+Это и реализовано.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+URL , на который мы хотим редиректнуться после авторизации, запоминается в middleware RememberReturnUrl.php
 
-### License
+Интересно работает. Всё - благодаря переменной сессии url.intended и методу redirect()->intended()
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+2) использую gravatar пользователя. Он берётся по имейлу . Если такого нет, возвращается картинка, построенная из хэша имейла
+смотри мой отзыв, ненастойчивые предложения по новым фичам №2 (http://www.evernote.com/l/ANlcvPHnZO1H9rKg3YlU1-i_x8MTHU4b5DI/)
+
+3) передаю title страницы, когда делаю extend во вьюхе
+
+4) использую несколько layout'ов (в поучительных целях)
+
+
+### Косяки:
+1. нет pagination на фронтенде (хотя если написать /articles/?page=2 заработает)
+2. пагинации нет потому, что механизм фильтра по категориям и по другим scope'ам (recent, most-commented) работает по-разному. По категориям надо фильтровать так же, как и по дате или кол-ву комментариев.
+ПРОСМОТР ПОСТОВ В КАТЕГОРИЯХ РЕАЛИЗОВАН КРИВО.
+Буду переделывать.
+
+Кроме того, должна быть возможность сортировать посты в категории по разным критериям. Т.е. посты должны отбираться по категории и сортироваться по выбранному критерию.
+
+3) сущности (посты, комментарии, юзеры) только создаются и просматриваются. Ничего изменять/удалять нельзя.
+Изменение/удаление не так просто, т.к. требует механизма защиты.
+
+### Что надо заимплементить в будущем:
+
+0. flash messaging
+1. отдельный scope для категорий
+2. pagination
+3. update статей, юзера, комментариев - с помощью котроля доступа https://mattstauffer.co/blog/acl-access-control-list-authorization-in-laravel-5-1
+4. DB seeds
+
+5. модели rate, follow, view
+6. админ-пользователи
+7. аттач картинок к постам
+8. удаление постов ajax-ом
+
