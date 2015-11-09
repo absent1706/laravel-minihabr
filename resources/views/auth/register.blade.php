@@ -1,4 +1,4 @@
-@extends('layouts.1-column')
+@extends('layouts.1-column', ['page_title' => 'Register'])
 
 @section('content')
 <div class="col-md-6 col-md-offset-3">

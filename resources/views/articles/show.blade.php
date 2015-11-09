@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.default', ['page_title' => $article->title])
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 <hr>
 
-@include('comments.create')
+@include('comments._create')
 
 <hr class="border-transparent">
 

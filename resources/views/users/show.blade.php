@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('users.layout', ['page_title' => $user->name])
 
 @section('user_info')
 

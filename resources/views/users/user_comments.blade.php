@@ -1,4 +1,4 @@
-@extends('users.layout', ['active_page' => 'comments'])
+@extends('users.layout', ['active_page' => 'comments', 'page_title' => 'Comments · '.$user->name])
 
 @section('user_info')
 

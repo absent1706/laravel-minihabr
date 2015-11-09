@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>{{ $page_title or 'MiniHabr' }}</title>
+  <title>{{ isset($page_title) ? $page_title.' · MiniHabr' : 'MiniHabr' }}</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
