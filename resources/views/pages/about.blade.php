@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.default')
 
 @section('content')
     <h1>About me {{ $name }} </h1>

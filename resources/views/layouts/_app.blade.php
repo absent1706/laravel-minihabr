@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>{{ $page_title or 'MiniHabr' }}</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -101,17 +101,7 @@
 
         <div class="row">
 
-          <!-- Blog Entries Column -->
-          <div class="col-md-8 col-md-offset-1">
-
-            @yield('content')
-
-          </div>
-
-          <!-- Blog Sidebar Widgets Column -->
-          <div class="col-md-3">
-            @include('categories.index')
-          </div>
+          @yield('columns')
 
         </div>
         <!-- /.row -->

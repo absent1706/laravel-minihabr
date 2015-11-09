@@ -1,7 +1,7 @@
-@extends('app')
+@extends('layouts.1-column')
 
 @section('content')
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-6 col-md-offset-3">
   <div class="well well-lg">
     @include('shared.errors_list')
 
