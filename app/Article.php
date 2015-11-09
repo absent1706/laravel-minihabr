@@ -31,11 +31,11 @@ class Article extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
-    public function scopeMostViewed($query)
-    {
-        // HARDCODE
-        return $query->orderBy('created_at', 'desc');
-    }
+    // public function scopeMostViewed($query)
+    // {
+    //     // HARDCODE
+    //     return $query->orderBy('created_at', 'desc');
+    // }
 
     public function scopeMostCommented($query)
     {
@@ -45,9 +45,9 @@ class Article extends Model
         ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(comments.article_id)'), 'desc');
     }
 
-    public function scopeMostRated($query)
-    {
-        // HARDCODE
-        return $query->orderBy('created_at', 'desc');
-    }
+    // public function scopeMostRated($query)
+    // {
+    //     // HARDCODE
+    //     return $query->orderBy('created_at', 'desc');
+    // }
 }

@@ -21,9 +21,9 @@ class ArticlesController extends Controller
     {
         $articles = Article::with(['user','category', 'comments']);
 
-        if     ($scope == 'most-viewed')    $articles = $articles->mostViewed();
-        elseif ($scope == 'most-commented') $articles = $articles->mostCommented();
-        elseif ($scope == 'most-rated')     $articles = $articles->mostRated();
+        if ($scope == 'most-commented') $articles = $articles->mostCommented();
+        // elseif ($scope == 'most-viewed')    $articles = $articles->mostViewed();
+        // elseif ($scope == 'most-rated')     $articles = $articles->mostRated();
         else                                $articles = $articles->recent();
 
         $articles = $articles->paginate(3);
