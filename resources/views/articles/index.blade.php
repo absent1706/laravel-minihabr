@@ -15,7 +15,7 @@
 
 @include('articles._list')
 
-<!-- Pager -->
+{{-- <!-- Pager -->
 <ul class="pager">
   <li class="previous">
     <a href="#">&larr; Older</a>
@@ -24,5 +24,7 @@
     <a href="#">Newer &rarr;</a>
   </li>
 </ul>
+
+{!! $articles->render() !!} --}}
 
 @stop
