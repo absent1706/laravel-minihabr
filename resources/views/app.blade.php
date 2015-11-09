@@ -50,27 +50,47 @@
                 </span>
               </div>
             </div>
+            {{-- Show if authorized --}}
             <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                @if (Auth::check())
+                        <li><a href="{{ route('articles.create') }}" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
+                        <li><a href="notifications.html" title="View notifications"><span class="glyphicon glyphicon-bell glyphicon-big"></span><span class="badge">2</span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Notifications</big></a></li>
 
-                {{-- Show if authorized --}}
-{{--              <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('articles.create') }}" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
-                <li><a href="notifications.html" title="View notifications"><span class="glyphicon glyphicon-bell glyphicon-big"></span><span class="badge">2</span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Notifications</big></a></li>
 
+                         <li class="dropdown">
+                          <a href="#" class="dropdown-toggle navbar-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="http://lorempixel.com/36/36/people/1/" class="img-rounded">
+                            <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <div class="dropdown-header">
+                                Signed in as
+                                <strong>{{ Auth::user()->name }}</strong>
+                              </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
+                            <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
+                            <li class="divider"></li>
+                            <li>{!! link_to_route('logout', 'Logout') !!}</li>
+                          </ul>
+                        </li>
+                @else
+                    <li>
+                      <p class="navbar-btn">
+                        {!! link_to_route('register', 'Register', null, ['class' => 'btn btn-success']) !!}
+                      </p>
+                    </li>
+                    <li>
+                      <p class="navbar-btn">
+                        {!! link_to_route('login', 'Login', null, ['class' => 'btn btn-default']) !!}
+                      </p>
+                    </li>
+                @endif
 
-                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle navbar-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="http://lorempixel.com/36/36/people/1/" class="img-rounded">
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="user-1.html">My profile</a></li>
-                    <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/session/destroy">Log out</a></li>
-                  </ul>
-                </li>
-              </ul>--}}
+              </ul>
             </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
         </div>

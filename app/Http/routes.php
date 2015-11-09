@@ -27,4 +27,13 @@ Route::resource('users.comments', 'UserCommentsController', ['only' => array('in
 
 Route::resource('categories', 'CategoriesController', ['only' => array('show')]);
 
+// Authentication routes...
+Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
+Route::post('auth/login', ['as' => 'login.post',  'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['as' => 'logout',      'uses' => 'Auth\AuthController@getLogout']);
+
+// Registration routes...
+Route::get('auth/register',  ['as' => 'register',      'uses' => 'Auth\AuthController@getRegister']);
+Route::post('auth/register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@postRegister']);
+
 // Route::resource('foo.bar.bez', 'Foo\Bar\BezController'); // For accessing Bez related with Foo and Bar

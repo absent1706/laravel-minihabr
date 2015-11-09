@@ -26,6 +26,12 @@ footer {
     margin-left: 15px; /* equal to margin-right */
 }
 
+.nav > li > .navbar-btn {
+    /* style similar to one for .nav > li > a */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 /* custom styles  */
 
 @media (max-width: 991px) {
