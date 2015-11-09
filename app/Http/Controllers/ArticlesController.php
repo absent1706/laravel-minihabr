@@ -9,9 +9,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Article;
+use App\Category;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +44,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create', ['categories' => Category::lists('name', 'id')]);
     }
 
     /**
@@ -47,12 +53,12 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\ArticleRequest $request)
     {
-        $input = Request::all();
-        Article::create($input);
+        $article = new Article($request->all());
+        \Auth::user()->articles()->save($article);
 
-        return redirect('articles');
+        return redirect(route('articles.index'));
     }
 
     /**

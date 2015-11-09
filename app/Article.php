@@ -9,6 +9,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'body',
+        'category_id',
     ];
 
     public function user()
