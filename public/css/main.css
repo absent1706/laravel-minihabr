@@ -46,6 +46,10 @@ footer {
     margin-top: 10px;
 }
 
+.article-body {
+    word-wrap: break-word;
+}
+
 .glyphicon-big {
     font-size: 1.3em;
 }
