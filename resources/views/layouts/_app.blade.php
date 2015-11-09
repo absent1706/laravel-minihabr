@@ -24,110 +24,110 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-      </head>
+  </head>
 
-      <body>
+  <body>
 
-       <!-- Static navbar -->
-       <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="col-md-offset-1">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+   <!-- Static navbar -->
+   <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="col-md-offset-1">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="{{ route('home') }}">MiniHabr</a>
+{{--           <div class="input-group search">
+            <input type="text" class="form-control" size="50">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
               </button>
-
-              <a class="navbar-brand" href="{{ route('home') }}">MiniHabr</a>
-              <div class="input-group search">
-                <input type="text" class="form-control" size="50">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-search"></span>
-                  </button>
-                </span>
-              </div>
-            </div>
-            {{-- Show if authorized --}}
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav navbar-right">
-                @if (Auth::check())
-                        <li><a href="{{ route('articles.create') }}" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
-                        <li><a href="notifications.html" title="View notifications"><span class="glyphicon glyphicon-bell glyphicon-big"></span><span class="badge">2</span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Notifications</big></a></li>
+            </span>
+          </div> --}}
+        </div>
+        {{-- Show if authorized --}}
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            @if (Auth::check())
+            <li><a href="{{ route('articles.create') }}" title="Write a new article"><span class="glyphicon glyphicon-pencil glyphicon-big"></span><big class="hidden-lg hidden-md hidden-sm">&nbsp;New article</big></a></li>
+            {{-- <li><a href="notifications.html" title="View notifications"><span class="glyphicon glyphicon-bell glyphicon-big"></span><span class="badge">2</span><big class="hidden-lg hidden-md hidden-sm">&nbsp;Notifications</big></a></li> --}}
 
 
-                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle navbar-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <img src="http://lorempixel.com/36/36/people/1/" class="img-rounded">
-                            <span class="caret"></span>
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li>
-                              <div class="dropdown-header">
-                                Signed in as
-                                <strong>{{ Auth::user()->name }}</strong>
-                              </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
-                            <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
-                            <li class="divider"></li>
-                            <li>{!! link_to_route('logout', 'Logout') !!}</li>
-                          </ul>
-                        </li>
-                @else
-                    <li>
-                      <p class="navbar-btn">
-                        {!! link_to_route('register', 'Register', null, ['class' => 'btn btn-success']) !!}
-                      </p>
-                    </li>
-                    <li>
-                      <p class="navbar-btn">
-                        {!! link_to_route('login', 'Login', null, ['class' => 'btn btn-default']) !!}
-                      </p>
-                    </li>
-                @endif
-
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle navbar-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ Gravatar::src(Auth::user()->email, 36) }}" class="img-rounded">
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <div class="dropdown-header">
+                    Signed in as
+                    <strong>{{ Auth::user()->name }}</strong>
+                  </div>
+                </li>
+                <li class="divider"></li>
+                <li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
+                {{--                             <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span>Settings</a></li> --}}
+                <li class="divider"></li>
+                <li>{!! link_to_route('logout', 'Logout') !!}</li>
               </ul>
-            </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
+            </li>
+            @else
+            <li>
+              <p class="navbar-btn">
+                {!! link_to_route('register', 'Register', null, ['class' => 'btn btn-success']) !!}
+              </p>
+            </li>
+            <li>
+              <p class="navbar-btn">
+                {!! link_to_route('login', 'Login', null, ['class' => 'btn btn-default']) !!}
+              </p>
+            </li>
+            @endif
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      @yield('columns')
+
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright &copy; Your Website 2014</p>
         </div>
-      </nav>
-
-      <!-- Page Content -->
-      <div class="container">
-
-        <div class="row">
-
-          @yield('columns')
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-          <div class="row">
-            <div class="col-lg-12">
-              <p>Copyright &copy; Your Website 2014</p>
-            </div>
-            <!-- /.col-lg-12 -->
-          </div>
-          <!-- /.row -->
-        </footer>
-
+        <!-- /.col-lg-12 -->
       </div>
-      <!-- /.container -->
+      <!-- /.row -->
+    </footer>
 
-      <!-- jQuery -->
-      <script src="{{ URL::asset('js/jquery.js') }}"></script>
+  </div>
+  <!-- /.container -->
 
-      <!-- Bootstrap Core JavaScript -->
-      <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+  <!-- jQuery -->
+  <script src="{{ URL::asset('js/jquery.js') }}"></script>
 
-    </body>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
-    </html>
+</body>
+
+</html>
