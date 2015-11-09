@@ -6,7 +6,16 @@
 
 <hr>
 
-@include('comments._create')
+@if (Auth::check())
+    @include('comments._create')
+@else
+    <p class="text-center">
+        {!! link_to_route('register', 'Register') !!}
+        or
+        {!! link_to_route('login', 'log in') !!}
+        to leave comments
+    </p>
+@endif
 
 <hr class="border-transparent">
 

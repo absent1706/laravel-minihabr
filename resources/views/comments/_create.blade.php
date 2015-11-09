@@ -1,9 +1,12 @@
 <div class="well">
     <h4>Leave a Comment:</h4>
-    <form role="form">
+    {!! Form::open(array('route' => 'comments.store')) !!}
+        {!! Form::hidden('article_id', $article->id) !!}
         <div class="form-group">
-            <textarea class="form-control" rows="3"></textarea>
+            {!! Form::textarea('body', null, ['class'=>'form-control', 'rows' => 3]) !!}
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <div class="form-group">
+            {!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
+        </div>
+    {!! Form::close() !!}
 </div>

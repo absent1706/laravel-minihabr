@@ -26,6 +26,7 @@ Route::resource('users.articles', 'UserArticlesController', ['only' => array('in
 Route::resource('users.comments', 'UserCommentsController', ['only' => array('index')]);
 
 Route::resource('categories', 'CategoriesController', ['only' => array('show')]);
+Route::resource('comments', 'CommentsController', ['only' => array('store')]);
 
 // Authentication routes...
 Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
