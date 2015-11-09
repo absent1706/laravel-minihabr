@@ -10,9 +10,10 @@
     @include('comments._create')
 @else
     <p class="text-center">
-        {!! link_to_route('register', 'Register') !!}
+        Please,
+        <a href="{{ route('register', ['return' => Request::url()]) }}">register</a>
         or
-        {!! link_to_route('login', 'log in') !!}
+        <a href="{{ route('login', ['return' => Request::url()]) }}">login</a>
         to leave comments
     </p>
 @endif
