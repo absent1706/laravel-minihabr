@@ -2,8 +2,8 @@
 
 @section('user_info')
 
-@if (count($user->articles))
-    @include('articles._list', ['articles' => $user->articles->sortByDesc('created_at')])
+@if (count($articles))
+    @include('articles._list')
 @else
     User has no articles
 @endif

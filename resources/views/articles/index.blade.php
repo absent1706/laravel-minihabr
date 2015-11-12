@@ -24,7 +24,4 @@
     <a href="#">Newer &rarr;</a>
   </li>
 </ul> --}}
-
-{!! $articles->appends(Input::except('page'))->render() !!}
-
 @stop
