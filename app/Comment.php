@@ -5,7 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\Parsing;
 
+use App\Traits\Filterable;
+
 class Comment extends Model {
+
+    use Filterable;
 
     protected $fillable = [
         'body',
@@ -29,20 +33,5 @@ class Comment extends Model {
     public function article()
     {
         return $this->belongsTo('App\Article');
-    }
-
-    public function scopeRecent($query)
-    {
-        return $query->orderBy('created_at', 'desc');
-    }
-
-    public function scopeFilterBy($query, $filters)
-    {
-        foreach ($filters as $field => $value)
-        {
-           $query->where($field, '=' , $value);
-        }
-
-        return $query;
     }
 }

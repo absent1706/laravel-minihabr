@@ -4,8 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\Filterable;
+
 class Article extends Model
 {
+    use Filterable;
+
     protected $fillable = [
         'title',
         'body',
@@ -27,11 +31,6 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
-    public function scopeRecent($query)
-    {
-        return $query->orderBy('created_at', 'desc');
-    }
-
     // public function scopeMostViewed($query)
     // {
     //     // HARDCODE
@@ -44,16 +43,6 @@ class Article extends Model
             ->leftJoin('comments', 'comments.article_id' , '=', 'articles.id')
             ->groupBy('articles.id')
         ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(comments.article_id)'), 'desc');
-    }
-
-    public function scopeFilterBy($query, $filters)
-    {
-        foreach ($filters as $field => $value)
-        {
-           $query->where($field, '=' , $value);
-        }
-
-        return $query;
     }
 
     // public function scopeMostRated($query)
