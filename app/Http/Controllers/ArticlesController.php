@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Article;
 use App\Category;
 
+use Input;
+
 class ArticlesController extends Controller
 {
     public function __construct()
@@ -23,18 +25,27 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($scope = '')
+    public function index()
     {
         $articles = Article::with(['user','category', 'comments']);
 
-        if ($scope == 'most-commented') $articles = $articles->mostCommented();
-        // elseif ($scope == 'most-viewed')    $articles = $articles->mostViewed();
-        // elseif ($scope == 'most-rated')     $articles = $articles->mostRated();
-        else                                $articles = $articles->recent();
+        $sort = Request::get('sort');
+        if ($sort == 'most-commented') $articles = $articles->mostCommented();
+        // elseif ($sort == 'most-viewed')    $articles = $articles->mostViewed();
+        // elseif ($sort == 'most-rated')     $articles = $articles->mostRated();
+        else {
+            $sort = '';
+            $articles = $articles->recent();
+        }
 
-        $articles = $articles->paginate(3);
+        if ($category_id = Request::get('cat'))
+        {
+            $articles->filterBy(['category_id' => $category_id]);
+        }
 
-        return view('articles.index', compact('articles', 'scope'));
+        $articles = $articles->paginate(2);
+
+        return view('articles.index', compact('articles', 'sort', 'category_id'));
     }
 
     /**

@@ -46,6 +46,16 @@ class Article extends Model
         ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(comments.article_id)'), 'desc');
     }
 
+    public function scopeFilterBy($query, $filters)
+    {
+        foreach ($filters as $field => $value)
+        {
+           $query->where($field, '=' , $value);
+        }
+
+        return $query;
+    }
+
     // public function scopeMostRated($query)
     // {
     //     // HARDCODE

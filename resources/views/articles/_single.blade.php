@@ -9,7 +9,7 @@
   <p>
     <small>
       <span class="glyphicon glyphicon-th-list"></span>
-      {!! link_to_route('categories.show', $article->category->name, $article->category->id) !!}
+      {!! link_to_route('articles.index', $article->category->name, ['cat' => $article->category->id]) !!}
     </small>
   </p>
 

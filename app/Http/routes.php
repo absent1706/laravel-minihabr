@@ -17,7 +17,6 @@
 // });
 
 Route::get('/', array( 'as' => 'home', 'uses' => 'ArticlesController@index' ));
-Route::get('articles/{scope}', 'ArticlesController@index')->where(['scope' => '(most-viewed|most-commented|most-rated)']);
 Route::resource('articles', 'ArticlesController');
 
 
@@ -25,7 +24,6 @@ Route::resource('users', 'UsersController');
 Route::resource('users.articles', 'UserArticlesController', ['only' => array('index')]);
 Route::resource('users.comments', 'UserCommentsController', ['only' => array('index')]);
 
-Route::resource('categories', 'CategoriesController', ['only' => array('show')]);
 Route::resource('comments', 'CommentsController', ['only' => array('store')]);
 
 // Authentication routes...
