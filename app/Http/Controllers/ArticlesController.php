@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Article;
 use App\Category;
 
-use Input;
+use Config;
 
 class ArticlesController extends Controller
 {
@@ -43,7 +43,7 @@ class ArticlesController extends Controller
             $articles->filterBy(['category_id' => $category_id]);
         }
 
-        $articles = $articles->paginate(2);
+        $articles = $articles->paginate(Config::get('frontend.articles_per_page'));
 
         return view('articles.index', compact('articles', 'sort', 'category_id'));
     }
