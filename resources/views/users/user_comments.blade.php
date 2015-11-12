@@ -2,8 +2,8 @@
 
 @section('user_info')
 
-@if (count($user->comments))
-    @foreach ($user->comments->sortByDesc('created_at') as $comment)
+@if (count($comments))
+    @foreach ($comments as $comment)
       <div class="row">
         <div class="col-md-2">
             <h5 class='no-margin-top'>{!! link_to_route('articles.show', $comment->article->title, $comment->article->id) !!}</h5>
@@ -14,6 +14,7 @@
       </div>
       <hr>
     @endforeach
+    {!! $comments->appends(Input::except('page'))->render() !!}
 @else
     User has no comments
 @endif

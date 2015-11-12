@@ -30,4 +30,19 @@ class Comment extends Model {
     {
         return $this->belongsTo('App\Article');
     }
+
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function scopeFilterBy($query, $filters)
+    {
+        foreach ($filters as $field => $value)
+        {
+           $query->where($field, '=' , $value);
+        }
+
+        return $query;
+    }
 }
