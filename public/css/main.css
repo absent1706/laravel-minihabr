@@ -13,6 +13,10 @@
     border-color: transparent !important;
 }
 
+.glyphicon-link-grey {
+    color: #333;
+}
+
 /* styles for existing elements and classes */
 footer {
     margin: 50px 0;
@@ -82,4 +86,3 @@ footer {
 .list-inline.list-inline-dashed > li:last-child {
   border-right: none;
 }
-

@@ -13,13 +13,10 @@ use App\Category;
 
 use Config;
 
+use Auth;
+
 class ArticlesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' => 'store']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +64,7 @@ class ArticlesController extends Controller
     public function store(Requests\ArticleRequest $request)
     {
         $article = new Article($request->all());
-        \Auth::user()->articles()->save($article);
+        Auth::user()->articles()->save($article);
 
         return redirect(route('articles.index'));
     }
@@ -92,7 +89,10 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article    = Article::findOrFail($id);
+        $categories = Category::lists('name', 'id');
+
+        return view('articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -102,9 +102,12 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\ArticleRequest $request, $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+
+        return redirect('articles');
     }
 
     /**
@@ -115,6 +118,9 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return redirect('articles');
     }
 }

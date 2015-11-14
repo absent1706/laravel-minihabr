@@ -1,6 +1,30 @@
 <div class="article">
+  <div class="created-info">
+    <div class="media">
+      <a href="{{ route('users.show', [$article->user->id]) }}" class="pull-left">
+        <img class="media-object img-rounded" src="{{ Gravatar::src($article->user->email, 20) }}">
+      </a>
+      <div class="media-body">
+        {!! link_to_route('users.show', $article->user->name, $article->user->id) !!}
+        <small class="created-date">{{ $article->created_at->diffForHumans() }}</small>
 
-  @include('shared._created_info', ['entity' => $article])
+        @if (can_manage_article($article))
+          <div class="pull-right">
+            <a href="{{ route('articles.edit', [$article->id]) }}" class="pull-left">
+              <span class="glyphicon glyphicon-pencil glyphicon-link-grey"></span>
+            </a>
+
+            {!! Form::open(['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
+              <button class="btn btn-link">
+                <span class="glyphicon glyphicon-trash glyphicon-link-grey"></span>
+              </button>
+            {!! Form::close() !!}
+          </div>
+        @endif
+
+      </div>
+    </div>
+  </div>
 
   <h2 class="article-title">
     {!! link_to_route('articles.show', $article->title, $article->id) !!}

@@ -17,7 +17,19 @@
 // });
 
 Route::get('/', array( 'as' => 'home', 'uses' => 'ArticlesController@index' ));
-Route::resource('articles', 'ArticlesController');
+
+Route::group(['middleware' => ['auth']], function()
+{
+    Route::resource('articles', 'ArticlesController',  ['only' => ['create', 'store']]);
+
+    Route::group(['middleware' => ['abort_if_cant_manage_article']], function()
+    {
+        Route::resource('articles', 'ArticlesController',  ['only' => ['edit', 'update', 'destroy']]);
+    });
+});
+
+// it's important to define articles.show AFTER articles.create because it can be incorrect routing at /articles/create
+Route::resource('articles', 'ArticlesController',  ['only' => ['index', 'show']]);
 
 
 Route::resource('users', 'UsersController');
