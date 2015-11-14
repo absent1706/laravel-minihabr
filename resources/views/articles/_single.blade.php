@@ -13,7 +13,7 @@
             <a href="{{ route('articles.edit', [$article->id]) }}">
               <span class="glyphicon glyphicon-pencil glyphicon-link-grey"></span>
             </a>
-            <a href="{{ route('articles.destroy', [$article->id]) }}" data-method="delete">
+            <a href="{{ route('articles.destroy', [$article->id]) }}" data-method="delete" data-confirm="Do you really want to delete an article?">
               <span class="glyphicon glyphicon-trash glyphicon-link-grey"></span>
             </a>
           </div>
