@@ -10,15 +10,12 @@
 
         @if (can_manage_article($article))
           <div class="pull-right">
-            <a href="{{ route('articles.edit', [$article->id]) }}" class="pull-left">
+            <a href="{{ route('articles.edit', [$article->id]) }}">
               <span class="glyphicon glyphicon-pencil glyphicon-link-grey"></span>
             </a>
-
-            {!! Form::open(['route' => ['articles.destroy', $article->id], 'method' => 'delete']) !!}
-              <button class="btn btn-link">
-                <span class="glyphicon glyphicon-trash glyphicon-link-grey"></span>
-              </button>
-            {!! Form::close() !!}
+            <a href="{{ route('articles.destroy', [$article->id]) }}" data-method="delete">
+              <span class="glyphicon glyphicon-trash glyphicon-link-grey"></span>
+            </a>
           </div>
         @endif
 
