@@ -1,3 +1,7 @@
+# MiniHabr
+
+See full, ready-to-run app versions (with db dumps and all dependencies) at full_app_releases_archive folder.
+
 # Release notes
 
 ## v0.3
