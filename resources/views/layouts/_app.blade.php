@@ -128,6 +128,9 @@
   <!-- Bootstrap Core JavaScript -->
   <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
+  <!-- Bootbox -->
+  <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>
+
   @include('layouts.parts.delete_links_hack')
 </body>
 

@@ -1,5 +1,8 @@
 {{-- Hack for sending DELETE request when clicking on links with data-method='delete' --}}
 {{-- CSRF token is also sent --}}
+
+{{-- !!! uses  bootbox (http://bootboxjs.com/) --}}
+
 <script>
   //  solution from http://stackoverflow.com/a/28420767
   (function() {
@@ -26,21 +29,15 @@
           return;
         }
 
-        // Allow user to optionally provide data-confirm="Are you sure?"
-        if ( link.data('confirm') ) {
-          if ( ! laravel.verifyConfirm(link) ) {
-            return false;
-          }
-        }
-
-        form = laravel.createForm(link);
-        form.submit();
-
         e.preventDefault();
-      },
 
-      verifyConfirm: function(link) {
-        return confirm(link.data('confirm'));
+        // Allow user to optionally provide data-confirm="Are you sure?"
+        bootbox.confirm(link.data('confirm'), function(confirmed) {
+            if (confirmed) {
+              form = laravel.createForm(link);
+              form.submit();
+            }
+        });
       },
 
       createForm: function(link) {
