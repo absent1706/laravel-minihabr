@@ -1,5 +1,20 @@
 # Release notes
 
+## v0.3
+
+### backend features
+Added possibilities to:
+ * update/delete articles
+ * delete comments
+ * update users (including user passwords)
+
+Middleware is used for checking permissions to manage resource, FormRequests are used to validate input.
+
+### Frontend features
+* Flash messages of various classes: info,success,warning, error (see shared.flash partial); info and success automatically disappear after 5 seconds (see js/app.js file)
+* Use Jeffrey Way's unobtrusive JS hack to make links to DELETE http method (code taken from http://stackoverflow.com/a/28420767) + use bootbox.js (http://bootboxjs.com/) for modal confirming (like 'are you sure want to delete article?') - see layouts.parts.delete_links_hack partial
+* Custom 403, 404 error pages
+
 ## v0.2.1
 Сделал отдельный scope для категорий, pagination.
 Параметры для отображения статей (метод сортировки и категория) теперь передаются в GET-параметрах.
