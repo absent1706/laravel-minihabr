@@ -39,7 +39,7 @@ class AbortIfCantManageArticle
         $article = Article::findOrFail($request->route()->parameter('articles'));
 
         if (!can_manage_article($article)) {
-            return abort(404);
+            return abort(403);
         }
 
         return $next($request);
