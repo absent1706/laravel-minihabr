@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -23,7 +24,11 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins, AuthenticatesAndRegistersUsers {
+      // trick for overriding postRegister method with call of original trait's postRegister method
+      AuthenticatesAndRegistersUsers::postRegister as traitPostRegister;
+    }
+
 
     protected $redirectTo='/articles';
 
@@ -71,6 +76,24 @@ class AuthController extends Controller
     public function getLogout()
     {
         Auth::logout();
-        return redirect()->back();
+        return redirect()->back()->with([
+            'flash_message' => 'You have been successfully logged out!',
+        ]);
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->intended($this->redirectPath())->with([
+            'flash_message' => 'You have been successfully logged in!',
+            'flash_class'   => 'success'
+        ]);
+    }
+
+    public function postRegister(Request $request)
+    {
+        return $this->traitPostRegister($request)->with([
+            'flash_message' => 'You have been successfully registered!',
+            'flash_class'   => 'success'
+        ]);
     }
 }

@@ -66,7 +66,10 @@ class ArticlesController extends Controller
         $article = new Article($request->all());
         Auth::user()->articles()->save($article);
 
-        return redirect(route('articles.index'));
+        return redirect(route('articles.index'))->with([
+            'flash_message' => 'Article has been created successfully!',
+            'flash_class'   => 'success'
+        ]);
     }
 
     /**
@@ -107,7 +110,9 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->update($request->all());
 
-        return redirect('articles');
+        return redirect('articles')->with([
+            'flash_message' => 'Article has been updated successfully!',
+        ]);
     }
 
     /**
@@ -121,6 +126,8 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return redirect('articles');
+        return redirect('articles')->with([
+            'flash_message' => 'Article has been deleted successfully!',
+        ]);
     }
 }

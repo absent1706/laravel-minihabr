@@ -4,6 +4,7 @@
 
 <!-- Main content -->
 <div class="col-md-12">
+  @include('shared.flash')
   @yield('content')
 </div>
 

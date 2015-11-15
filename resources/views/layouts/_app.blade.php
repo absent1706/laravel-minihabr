@@ -131,6 +131,8 @@
   <!-- Bootbox -->
   <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>
 
+  <script src="{{ URL::asset('js/app.js') }}"></script>
+
   @include('layouts.parts.delete_links_hack')
 </body>
 
