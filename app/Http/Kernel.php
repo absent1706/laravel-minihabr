@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
         'remember_return_url'          => \App\Http\Middleware\RememberReturnUrl::class,
         'abort_if_cant_manage_article' => \App\Http\Middleware\AbortIfCantManageArticle::class,
         'abort_if_cant_manage_comment' => \App\Http\Middleware\AbortIfCantManageComment::class,
+        'abort_if_cant_manage_user'    => \App\Http\Middleware\AbortIfCantManageUser::class,
     ];
 }

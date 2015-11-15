@@ -72,7 +72,7 @@
                 </li>
                 <li class="divider"></li>
                 <li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
-                {{--                             <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span>Settings</a></li> --}}
+                <li><a href="{{ route('users.edit', Auth::user()->id) }}"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
                 <li class="divider"></li>
                 <li>{!! link_to_route('logout', 'Logout') !!}</li>
               </ul>

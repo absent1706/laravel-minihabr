@@ -8,40 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Http\Requests\UserUpdateRequest;
+
+use Input;
+use Hash;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
@@ -62,7 +35,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -72,9 +46,31 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UserUpdateRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->except(['email', 'password']));
+
+        return redirect()->back()->with([
+            'flash_message' => 'User profile has been updated successfully!',
+            'flash_class'   => 'success'
+        ]);
+    }
+
+    public function updatePassword(Requests\UserUpdatePasswordRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if(Hash::check(Input::get('old_password'), $user->getAuthPassword())) {
+            $user->update(['password' => Hash::make(Input::get('password'))]);
+        } else {
+            return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect']);
+        }
+
+        return redirect()->back()->with([
+            'flash_message' => 'User password has been updated successfully!',
+            'flash_class'   => 'success'
+        ]);
     }
 
     /**

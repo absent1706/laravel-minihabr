@@ -1,20 +1,31 @@
 <?php
 
-function _can_manage_content_entity($entity, $user = null)
+function _can_manage_content_entity($entity, $managingUser = null)
 {
     // try to obtain current user
-    if (!$user && \Auth::check()) $user = \Auth::user();
+    if (!$managingUser && \Auth::check()) $managingUser = \Auth::user();
 
     // if user found and this user is the entity author, return TRUE
-    return ($user && ($user->id == $entity->user->id));
+    return ($managingUser && ($managingUser->id == $entity->user->id));
 }
 
-function can_manage_article($article, $user = null)
+function can_manage_article($article, $managingUser = null)
 {
-   return _can_manage_content_entity($article, $user);
+   return _can_manage_content_entity($article, $managingUser);
 }
 
-function can_manage_comment($comment, $user = null)
+function can_manage_comment($comment, $managingUser = null)
 {
-   return _can_manage_content_entity($comment, $user);
+   return _can_manage_content_entity($comment, $managingUser);
+}
+
+/*----------*/
+
+function can_manage_user($managedUser, $managingUser = null)
+{
+    // try to obtain current user
+    if (!$managingUser && \Auth::check()) $managingUser = \Auth::user();
+
+    // if user found and this user is the entity author, return TRUE
+    return ($managingUser && ($managingUser->id == $managedUser->id));
 }

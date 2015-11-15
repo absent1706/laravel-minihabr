@@ -33,6 +33,11 @@ Route::resource('articles', 'ArticlesController',  ['only' => ['index', 'show']]
 
 
 Route::resource('users', 'UsersController', ['only' => 'show']);
+Route::group(['middleware' => ['abort_if_cant_manage_user']], function()
+{
+    Route::resource('users', 'UsersController',  ['only' => ['edit', 'update', 'destroy']]);
+    Route::put('users/{users}/password', ['uses' => 'UsersController@updatePassword', 'as' => 'users.update_password']);
+});
 
 Route::resource('users.articles', 'UserArticlesController', ['only' => 'index']);
 Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);
