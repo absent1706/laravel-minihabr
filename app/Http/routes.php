@@ -16,7 +16,7 @@
 //     var_dump($query);
 // });
 
-Route::get('/', array( 'as' => 'home', 'uses' => 'ArticlesController@index' ));
+Route::get('/', ['as' => 'home', 'uses' => 'ArticlesController@index']);
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -32,18 +32,19 @@ Route::group(['middleware' => ['auth']], function()
 Route::resource('articles', 'ArticlesController',  ['only' => ['index', 'show']]);
 
 
-Route::resource('users', 'UsersController');
-Route::resource('users.articles', 'UserArticlesController', ['only' => array('index')]);
-Route::resource('users.comments', 'UserCommentsController', ['only' => array('index')]);
+Route::resource('users', 'UsersController', ['only' => 'show']);
+
+Route::resource('users.articles', 'UserArticlesController', ['only' => 'index']);
+Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);
 
 
 Route::group(['middleware' => ['auth']], function()
 {
-    Route::resource('comments', 'CommentsController', ['only' => array('store')]);
+    Route::resource('comments', 'CommentsController', ['only' => 'store']);
 
     Route::group(['middleware' => ['abort_if_cant_manage_comment']], function()
     {
-        Route::resource('comments', 'CommentsController',  ['only' => ['destroy']]);
+        Route::resource('comments', 'CommentsController',  ['only' => 'destroy']);
     });
 });
 
