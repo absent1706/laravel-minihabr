@@ -36,7 +36,18 @@ Route::resource('users', 'UsersController');
 Route::resource('users.articles', 'UserArticlesController', ['only' => array('index')]);
 Route::resource('users.comments', 'UserCommentsController', ['only' => array('index')]);
 
-Route::resource('comments', 'CommentsController', ['only' => array('store')]);
+
+Route::group(['middleware' => ['auth']], function()
+{
+    Route::resource('comments', 'CommentsController', ['only' => array('store')]);
+
+    Route::group(['middleware' => ['abort_if_cant_manage_comment']], function()
+    {
+        Route::resource('comments', 'CommentsController',  ['only' => ['destroy']]);
+    });
+});
+
+
 
 // Authentication routes...
 Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);

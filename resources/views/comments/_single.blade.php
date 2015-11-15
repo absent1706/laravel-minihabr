@@ -7,6 +7,12 @@
             <div class="media-body">
                 {!! link_to_route('users.show', $comment->user->name, $comment->user->id) !!}
                 <small class="created-date">{{ $comment->created_at->diffForHumans() }}</small>
+
+                @if (can_manage_comment($comment))
+                    <div class="pull-right">
+                        <a href="{{ route('comments.destroy', [$comment->id]) }}" data-method="delete" data-confirm="Do you really want to delete your comment?"><span class="glyphicon glyphicon-trash glyphicon-link-grey"></span></a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

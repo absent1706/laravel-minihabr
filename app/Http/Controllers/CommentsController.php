@@ -12,11 +12,6 @@ use App\Article;
 
 class CommentsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -33,6 +28,19 @@ class CommentsController extends Controller
             Comment::create($input);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'flash_message' => 'Your comment has been added successfully!',
+            'flash_class'   => 'success'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        return redirect()->back()->with([
+            'flash_message' => 'Your comment has been deleted successfully!',
+        ]);
     }
 }
