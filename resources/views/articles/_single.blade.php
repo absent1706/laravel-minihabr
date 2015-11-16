@@ -42,7 +42,7 @@
       <small>
         <a href="{{ route('articles.show', [$article->id]).'#comments' }}" title="View comments">
           <span class="glyphicon glyphicon-comment"></span>
-          {{ $article->comments->count() }}
+          <span class="comment-counter">{{ $article->comments->count() }}</span>
         </a>
       </small>
     </li>

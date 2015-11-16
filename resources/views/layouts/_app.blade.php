@@ -17,12 +17,32 @@
   <!-- Custom CSS -->
   <link href="{{ URL::asset('css/main.css') }}"  rel="stylesheet">
 
+  <!-- PNotify Core CSS -->
+  <link href="{{ URL::asset('css/pnotify.custom.min.css') }}" rel="stylesheet">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+  <!-- jQuery -->
+  <script src="{{ URL::asset('js/jquery.js') }}"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+
+  <!-- Bootbox -->
+  <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>
+
+  <!-- PNotify JS -->
+  <script src="{{ URL::asset('js/pnotify.custom.min.js') }}"></script>
+
+  <!-- App main JS -->
+  <script src="{{ URL::asset('js/app.js') }}"></script>
+
+  @include('layouts.parts.delete_links_hack')
 
   </head>
 
@@ -121,19 +141,6 @@
 
   </div>
   <!-- /.container -->
-
-  <!-- jQuery -->
-  <script src="{{ URL::asset('js/jquery.js') }}"></script>
-
-  <!-- Bootstrap Core JavaScript -->
-  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-
-  <!-- Bootbox -->
-  <script src="{{ URL::asset('js/bootbox.min.js') }}"></script>
-
-  <script src="{{ URL::asset('js/app.js') }}"></script>
-
-  @include('layouts.parts.delete_links_hack')
 </body>
 
 </html>

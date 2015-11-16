@@ -5,8 +5,7 @@
 
 <script>
   //  solution from http://stackoverflow.com/a/28420767
-  (function() {
-
+  $(function() {
     var laravel = {
       initialize: function() {
         this.methodLinks = $('a[data-method]');
@@ -68,5 +67,5 @@
 
     laravel.initialize();
 
-  })();
+  });
 </script>

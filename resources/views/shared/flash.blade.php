@@ -1,3 +1,11 @@
 @if(session()->has('flash_message'))
-<div class="alert {{ session()->has('flash_class') ? 'alert-'.session('flash_class') : 'alert-info' }}">{{ session('flash_message') }}</div>
+<script>
+    $(function() {
+        @if(session()->has('flash_class'))
+            notify( "{{ session('flash_message') }}", "{{ session('flash_class') }}" );
+        @else
+            notify( "{{ session('flash_message') }}" );
+        @endif
+    });
+</script>
 @endif

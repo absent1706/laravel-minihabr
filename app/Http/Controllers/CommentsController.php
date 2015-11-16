@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Comment;
 use App\Article;
+use Auth;
 
 class CommentsController extends Controller
 {
@@ -18,20 +19,20 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CommentRequest $request)
     {
-        if (($article_id = $request->get('article_id')) && $article = Article::find($article_id))
-        {
-            $input = $request->all();
-            $input['user_id'] = \Auth::user()->id;
+        $comment = new Comment($request->all());
+        Auth::user()->comments()->save($comment);
 
-            Comment::create($input);
-        }
-
-        return redirect()->back()->with([
-            'flash_message' => 'Your comment has been added successfully!',
+        $flash = [
+            'flash_message' => 'Comment has been added successfully!',
             'flash_class'   => 'success'
-        ]);
+        ];
+        if ($request->ajax()) {
+            return response()->json($flash + [ 'html' => view('comments._single', compact('comment'))->render() ]);
+        } else {
+            return redirect()->back()->with($flash);
+        }
     }
 
     public function destroy($id)
@@ -40,7 +41,7 @@ class CommentsController extends Controller
         $comment->delete();
 
         return redirect()->back()->with([
-            'flash_message' => 'Your comment has been deleted successfully!',
+            'flash_message' => 'Comment has been deleted successfully!',
         ]);
     }
 }
