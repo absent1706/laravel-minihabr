@@ -18,25 +18,29 @@ function notify(text, status, autohide, icon) {
 }
 
 // default AJAX error handler
-$( document ).ajaxError(function(event, jqXHR, settings, thrownError) {
+function defaultAjaxError(form, jqXHR) {
     // try to obtain response as JSON
-    var responseJson = jqXHR.responseJSON;
+    var errors = jqXHR.responseJSON;
 
     // obtain response text. if it's a JSON, prettify it
-    var responseText = (responseJson) ? JSON.stringify(responseJson,null,2) : jqXHR.responseText; // it's OK even if response is a regular string
+    var responseText = (errors) ? JSON.stringify(errors,null,2) : jqXHR.responseText; // it's OK even if response is a regular string
     console.log(responseText);
 
     // if error is form validation error, collect all errors to array and display them as notification
-    if (responseJson && jqXHR.status == 422) {
-        var errors = [];
-        for(var field in responseJson) {
-            errors.push(responseJson[field]);
-        }
-        notify(errors.join('<br/>'), 'error');
+    if (errors && jqXHR.status == 422) {
+        $(form).find(':input').each(
+            function(index){
+                var field = $(this);
+                var fieldname = $(this).attr('name');
+                if(errors.hasOwnProperty(fieldname )) {
+                   field.after('<p class="help-block">'+errors[fieldname]+'</p>');
+                   field.closest('.form-group').addClass('has-error');
+                }
+            }
+        );
     }
     // for other errors just throw common error notification
     else {
         notify('Sorry, some error occured', 'error');
     }
-
-});
+}

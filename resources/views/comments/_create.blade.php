@@ -32,7 +32,8 @@
                 comment_counter.html(parseInt(comment_counter.html()) + 1); // increase comment counter
 
                 notify(result.flash_message, result.flash_class); // notify that comment is created
-            }
+            },
+            error: function(jqXHR) {defaultAjaxError(form, jqXHR);}
         });
     });
     </script>
