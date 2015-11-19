@@ -49,3 +49,11 @@ function removeFormErrors(form) {
     $(form).find('.form-group').find('.help-block').remove();
     $(form).find('.form-group').removeClass('has-error');
 }
+
+$(document).ajaxSend(function(event, request, settings) {
+    $('.loading-indicator').show();
+});
+
+$(document).ajaxComplete(function(event, request, settings) {
+    $('.loading-indicator').hide();
+});

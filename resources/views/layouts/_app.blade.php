@@ -20,6 +20,8 @@
   <!-- PNotify Core CSS -->
   <link href="{{ URL::asset('css/pnotify.custom.min.css') }}" rel="stylesheet">
 
+<link href="{{ URL::asset('css/whirl.min.css') }}" rel="stylesheet">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -139,6 +141,7 @@
       <!-- /.row -->
     </footer>
 
+  <div class="loading-indicator"><div class="whirl traditional"></div></div>
   </div>
   <!-- /.container -->
 </body>
