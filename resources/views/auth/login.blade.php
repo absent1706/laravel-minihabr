@@ -3,7 +3,16 @@
 @section('content')
 <div class="col-md-6 col-md-offset-3">
   <div class="well well-lg">
-    @include('shared.errors_list')
+
+    @if ($errors->any())
+        <script>
+            $(function() {
+                @foreach ($errors->all() as $error)
+                    notify('{{ $error }}', 'error');
+                @endforeach
+            });
+        </script>
+    @endif
 
     {!! Form::open(array('route' => 'login.post')) !!}
 
