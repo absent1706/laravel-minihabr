@@ -38,6 +38,9 @@
             },
             error: function(jqXHR) {defaultAjaxError(form, jqXHR);}
         });
+
+        removeFormErrors(form);
+
     });
     </script>
 @endif

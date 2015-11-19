@@ -44,3 +44,8 @@ function defaultAjaxError(form, jqXHR) {
         notify('Sorry, some error occured', 'error');
     }
 }
+
+function removeFormErrors(form) {
+    $(form).find('.form-group').find('.help-block').remove();
+    $(form).find('.form-group').removeClass('has-error');
+}
