@@ -10,6 +10,10 @@
     <h3 class="media-heading">{{ $user->name }}</h3>
         <p><span class="glyphicon glyphicon-envelope"></span>{{ $user->email }}</p>
         <p><span class="glyphicon glyphicon-user"></span>Joined {{ $user->created_at->toFormattedDateString() }}</p>
+
+        @if (can_manage_user($user))
+            {!! link_to_route('users.edit', 'Manage profile', $user->id, ['class' => 'btn btn-primary']) !!}
+        @endif
     </div>
 </div>
 

@@ -90,6 +90,11 @@
                   <div class="dropdown-header">
                     Signed in as
                     <strong>{{ Auth::user()->name }}</strong>
+
+                    @if(Auth::user()->is_admin)
+                      <br/>(have admin rights)
+                    @endif
+
                   </div>
                 </li>
                 <li class="divider"></li>

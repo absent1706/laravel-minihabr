@@ -6,7 +6,7 @@ function _can_manage_content_entity($entity, $managingUser = null)
     if (!$managingUser && \Auth::check()) $managingUser = \Auth::user();
 
     // if user found and this user is the entity author, return TRUE
-    return ($managingUser && ($managingUser->id == $entity->user->id));
+    return ($managingUser && (($managingUser->id == $entity->user->id) || $managingUser->is_admin));
 }
 
 function can_manage_article($article, $managingUser = null)
@@ -27,5 +27,5 @@ function can_manage_user($managedUser, $managingUser = null)
     if (!$managingUser && \Auth::check()) $managingUser = \Auth::user();
 
     // if user found and this user is the entity author, return TRUE
-    return ($managingUser && ($managingUser->id == $managedUser->id));
+    return ($managingUser && (($managingUser->id == $managedUser->id) || $managingUser->is_admin));
 }

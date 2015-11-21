@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
+use Auth;
+
 class UserUpdatePasswordRequest extends Request
 {
     /**
@@ -23,9 +25,9 @@ class UserUpdatePasswordRequest extends Request
      */
     public function rules()
     {
-        return [
-            'old_password' => 'required',
-            'password'     => 'required|confirmed|min:6',
+        $rules = [
+            'password' => 'required|confirmed|min:6',
         ];
+        return $rules;
     }
 }

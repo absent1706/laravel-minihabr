@@ -12,6 +12,7 @@ use App\Http\Requests\UserUpdateRequest;
 
 use Input;
 use Hash;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -60,7 +61,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if(Hash::check(Input::get('old_password'), $user->getAuthPassword())) {
+        if(Auth::user()->is_admin || Hash::check(Input::get('old_password'), $user->getAuthPassword())) {
             $user->update(['password' => Hash::make(Input::get('password'))]);
         } else {
             return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect']);
