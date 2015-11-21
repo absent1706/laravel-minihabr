@@ -27,5 +27,36 @@
     @endforeach
 </div>
 
+@if (Auth::check())
+    @if(config('frontend.allow_ajax_crud_requests'))
+        <script>
+        $( '.create-comment-form' ).on( 'submit', function(e) {
+            e.preventDefault();
+            form = this;
+            $.ajax({
+                type: form.method,
+                url:  form.action,
+                data: $(form).serialize(),
+                dataType: 'json',
+                success: function( result ) {
+                    $(form).trigger('reset'); // reset all fields in a form
+
+                    $('#comments').append(result.html + '\n<hr>\n'); // display created comment
+
+                    var comment_counter = $('.comment-counter').first();
+                    comment_counter.html(parseInt(comment_counter.html()) + 1); // increase comment counter
+
+                    notify(result.flash_message, result.flash_class); // notify that comment is created
+                },
+                error: function(jqXHR) {app.defaultAjaxError(form, jqXHR);}
+            });
+
+            app.removeFormErrors(form);
+
+        });
+        </script>
+    @endif
+@endif
+
 @stop
 
