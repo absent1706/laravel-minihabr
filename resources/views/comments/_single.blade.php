@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="comment" id="comment{{ $comment->id }}">
     <div class="created-info">
         <div class="media">
             <a href="{{ route('users.show', [$comment->user->id]) }}" class="pull-left">
@@ -10,7 +10,7 @@
 
                 @if (can_manage_comment($comment))
                     <div class="pull-right">
-                        <a href="{{ route('comments.destroy', [$comment->id]) }}" data-method="delete" data-confirm="Do you really want to delete your comment?"><span class="glyphicon glyphicon-trash glyphicon-link-grey"></span></a>
+                        <a href="{{ route('comments.destroy', [$comment->id]) }}" class="delete-comment-link" data-comment-id="{{ $comment->id }}" data-method="delete" data-confirm="Do you really want to delete your comment?"><span class="glyphicon glyphicon-trash glyphicon-link-grey"></span></a>
                     </div>
                 @endif
             </div>

@@ -55,6 +55,31 @@
             app.removeFormErrors(form);
 
         });
+
+        // attach event to dynamically created elements - forms created from delete links
+        $(document).on('submit', '.form-from-link.delete-comment-link', function(e) {
+            e.preventDefault();
+            form = this;
+            $.ajax({
+                type: form.method,
+                url:  form.action,
+                data: $(form).serialize(),
+                dataType: 'json',
+                success: function( result ) {
+                    $(form).trigger('reset'); // reset all fields in a form
+                    var commentId = $(form).data('commentId');
+
+                    // find link with needed commentId and comment it lays in
+                    $('.delete-comment-link[data-comment-id="' + commentId + '"]').closest('.comment').closest('li').slideUp('slow', function() { $(form).remove(); } );
+
+                    var comment_counter = $('.comment-counter');
+                    comment_counter.html(parseInt(comment_counter.html()) - 1); // increase comment counter
+
+                    notify(result.flash_message, result.flash_class); // notify that comment is deleted
+                },
+                error: function(jqXHR) {app.defaultAjaxError(form, jqXHR);}
+            });
+        });
         </script>
     @endif
 @endif

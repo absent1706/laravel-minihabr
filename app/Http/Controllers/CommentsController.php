@@ -32,13 +32,16 @@ class CommentsController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return redirect()->back()->with([
-            'flash_message' => 'Comment has been deleted successfully!',
-        ]);
+        $flash = ['flash_message' => 'Comment has been deleted successfully!'];
+        if ($request->ajax()) {
+            return response()->json($flash);
+        } else {
+            return redirect()->back()->with($flash);
+        }
     }
 }

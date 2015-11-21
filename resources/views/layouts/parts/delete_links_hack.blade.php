@@ -8,13 +8,7 @@
   $(function() {
     var laravel = {
       initialize: function() {
-        this.methodLinks = $('a[data-method]');
-
-        this.registerEvents();
-      },
-
-      registerEvents: function() {
-        this.methodLinks.on('click', this.handleMethod);
+        $(document).on('click', 'a[data-method]', this.handleMethod);
       },
 
       handleMethod: function(e) {
@@ -43,8 +37,12 @@
         var form =
         $('<form>', {
           'method': 'POST',
-          'action': link.attr('href')
+          'action': link.attr('href'),
+          'class':  'form-from-link ' + link.attr('class') // copy classes from link
         });
+
+        // copy data attributes from link
+        form.data( link.data() );
 
         var token =
         $('<input>', {
