@@ -17,37 +17,39 @@ function notify(text, status, autohide, icon) {
     });
 }
 
-// default AJAX error handler
-function defaultAjaxError(form, jqXHR) {
-    // try to obtain response as JSON
-    var errors = jqXHR.responseJSON;
+app = {
+    removeFormErrors: function (form)     {
+        $(form).find('.form-group').find('.help-block').remove();
+        $(form).find('.form-group').removeClass('has-error');
+    },
 
-    // obtain response text. if it's a JSON, prettify it
-    var responseText = (errors) ? JSON.stringify(errors,null,2) : jqXHR.responseText; // it's OK even if response is a regular string
-    console.log(responseText);
+    // default AJAX error handler
+    defaultAjaxError: function (form, jqXHR) {
+        // try to obtain response as JSON
+        var errors = jqXHR.responseJSON;
 
-    // if error is form validation error, collect all errors to array and display them as notification
-    if (errors && jqXHR.status == 422) {
-        $(form).find(':input').each(
-            function(index){
-                var field = $(this);
-                var fieldname = $(this).attr('name');
-                if(errors.hasOwnProperty(fieldname )) {
-                   field.after('<p class="help-block">'+errors[fieldname]+'</p>');
-                   field.closest('.form-group').addClass('has-error');
+        // obtain response text. if it's a JSON, prettify it
+        var responseText = (errors) ? JSON.stringify(errors,null,2) : jqXHR.responseText; // it's OK even if response is a regular string
+        console.log(responseText);
+
+        // if error is form validation error, collect all errors to array and display them as notification
+        if (errors && jqXHR.status == 422) {
+            $(form).find(':input').each(
+                function(index){
+                    var field = $(this);
+                    var fieldname = $(this).attr('name');
+                    if(errors.hasOwnProperty(fieldname )) {
+                       field.after('<p class="help-block">'+errors[fieldname]+'</p>');
+                       field.closest('.form-group').addClass('has-error');
+                    }
                 }
-            }
-        );
+            );
+        }
+        // for other errors just throw common error notification
+        else {
+            notify('Sorry, some error occured', 'error');
+        }
     }
-    // for other errors just throw common error notification
-    else {
-        notify('Sorry, some error occured', 'error');
-    }
-}
-
-function removeFormErrors(form) {
-    $(form).find('.form-group').find('.help-block').remove();
-    $(form).find('.form-group').removeClass('has-error');
 }
 
 $(document).ajaxSend(function(event, request, settings) {

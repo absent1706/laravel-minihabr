@@ -36,10 +36,10 @@
 
                 notify(result.flash_message, result.flash_class); // notify that comment is created
             },
-            error: function(jqXHR) {defaultAjaxError(form, jqXHR);}
+            error: function(jqXHR) {app.defaultAjaxError(form, jqXHR);}
         });
 
-        removeFormErrors(form);
+        app.removeFormErrors(form);
 
     });
     </script>
