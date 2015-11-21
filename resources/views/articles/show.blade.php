@@ -42,9 +42,9 @@
                 success: function( result ) {
                     $(form).trigger('reset'); // reset all fields in a form
 
-                    $('#comments').append(result.html + '\n<hr>\n'); // display created comment
+                    $('#comments').append('<li>' + result.html + '\n</li>\n'); // display created comment
 
-                    var comment_counter = $('.comment-counter').first();
+                    var comment_counter = $('.comment-counter');
                     comment_counter.html(parseInt(comment_counter.html()) + 1); // increase comment counter
 
                     notify(result.flash_message, result.flash_class); // notify that comment is created
