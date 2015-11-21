@@ -24,10 +24,7 @@ class CommentsController extends Controller
         $comment = new Comment($request->all());
         Auth::user()->comments()->save($comment);
 
-        $flash = [
-            'flash_message' => 'Comment has been added successfully!',
-            'flash_class'   => 'success'
-        ];
+        $flash = ['flash_message' => 'Comment has been added successfully!'];
         if ($request->ajax()) {
             return response()->json($flash + [ 'html' => view('comments._single', compact('comment'))->render() ]);
         } else {

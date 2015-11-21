@@ -52,8 +52,7 @@ class UsersController extends Controller
         $user->update($request->except(['email', 'password']));
 
         return redirect()->back()->with([
-            'flash_message' => 'User profile has been updated successfully!',
-            'flash_class'   => 'success'
+            'flash_message' => 'User profile has been updated successfully!'
         ]);
     }
 
@@ -68,8 +67,7 @@ class UsersController extends Controller
         }
 
         return redirect()->back()->with([
-            'flash_message' => 'User password has been updated successfully!',
-            'flash_class'   => 'success'
+            'flash_message' => 'User password has been updated successfully!'
         ]);
     }
 

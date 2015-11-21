@@ -84,16 +84,14 @@ class AuthController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return redirect()->intended($this->redirectPath())->with([
-            'flash_message' => 'You have been successfully logged in!',
-            'flash_class'   => 'success'
+            'flash_message' => 'You have been successfully logged in!'
         ]);
     }
 
     public function postRegister(Request $request)
     {
         return $this->traitPostRegister($request)->with([
-            'flash_message' => 'You have been successfully registered!',
-            'flash_class'   => 'success'
+            'flash_message' => 'You have been successfully registered!'
         ]);
     }
 }

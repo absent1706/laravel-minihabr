@@ -1,6 +1,6 @@
 PNotify.prototype.options.styling = "bootstrap3";
 function notify(text, status, autohide, icon) {
-    if (status   === undefined) status = 'info';
+    if (status   === undefined) status = 'success';
     if (autohide === undefined) autohide = true;
     if (icon     === undefined) icon = false;
 

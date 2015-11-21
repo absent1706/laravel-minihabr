@@ -67,8 +67,7 @@ class ArticlesController extends Controller
         Auth::user()->articles()->save($article);
 
         return redirect(route('articles.index'))->with([
-            'flash_message' => 'Article has been created successfully!',
-            'flash_class'   => 'success'
+            'flash_message' => 'Article has been created successfully!'
         ]);
     }
 
