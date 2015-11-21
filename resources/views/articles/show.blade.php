@@ -20,12 +20,13 @@
 
 <hr class="border-transparent">
 
-<div id="comments">
+<ul id="comments" class="list-unstyled list-split-hr">
     @foreach ($article->comments as $comment)
-        @include('comments._single')
-        <hr>
+        <li>
+            @include('comments._single')
+        </li>
     @endforeach
-</div>
+</ul>
 
 @if (Auth::check())
     @if(config('frontend.allow_ajax_crud_requests'))

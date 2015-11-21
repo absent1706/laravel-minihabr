@@ -109,3 +109,13 @@ footer {
 .loading-indicator .whirl {
     top: 50%;
 }
+
+/* after comments and articles in list we automatically insert element '<hr> lines' */
+.list-split-hr > li:after {
+    content:"";
+    display: block;
+    margin: 20px 0;
+    border-width: 1px 0px 0px;
+    border-style: solid none none;
+    border-color: #EEE;
+}
