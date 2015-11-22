@@ -4,6 +4,16 @@ See full, ready-to-run app versions (with db dumps and all dependencies) at full
 
 # Release notes
 
+## v0.5
+### Backend:
+1. + is_admin flag for users;
+2. + admin user can manage all articles, comments and user profiles
+3. + category CRUD for admin users
+
+### Refactoring:
+1. provided default data-confirm value for put/delete links (see delete_links_hack template)
+2. Renamed categories._list partial to widgets.categories
+
 ## v0.4
 
 ### Backend:
