@@ -10,6 +10,6 @@
 
 <!-- Sidebar Widgets Column -->
 <div class="col-md-3">
-  @include('categories._widget')
+  @include('widgets.categories')
 </div>
 @endsection
