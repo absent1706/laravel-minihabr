@@ -5,8 +5,10 @@
     <div class="col-md-8 col-md-offset-2">
         <h2 class="page-header">Manage categories</h2>
 
-        {!! link_to_route('categories.create', '+ Add category', null, ['class' => 'btn btn-success']) !!}
-        <hr class="border-transparent">
+        @if(Auth::check() && Auth::user()->is_admin)
+            {!! link_to_route('categories.create', '+ Add category', null, ['class' => 'btn btn-success']) !!}
+            <hr class="border-transparent">
+        @endif
 
         <ul class="list-unstyled list-split-hr">
             @foreach($categories as $category)
