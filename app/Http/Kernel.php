@@ -29,6 +29,7 @@ class Kernel extends HttpKernel
         'auth'                         => \App\Http\Middleware\Authenticate::class,
         'auth.basic'                   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest'                        => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin'                        => \App\Http\Middleware\AbortIfNotAdmin::class,
         'remember_return_url'          => \App\Http\Middleware\RememberReturnUrl::class,
         'abort_if_cant_manage_article' => \App\Http\Middleware\AbortIfCantManageArticle::class,
         'abort_if_cant_manage_comment' => \App\Http\Middleware\AbortIfCantManageComment::class,

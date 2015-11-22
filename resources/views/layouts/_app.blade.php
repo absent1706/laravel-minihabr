@@ -90,13 +90,14 @@
                   <div class="dropdown-header">
                     Signed in as
                     <strong>{{ Auth::user()->name }}</strong>
-
-                    @if(Auth::user()->is_admin)
-                      <br/>(have admin rights)
-                    @endif
-
                   </div>
                 </li>
+                @if(Auth::user()->is_admin)
+                  <li class="divider"></li>
+
+                  <li><div class="dropdown-header">Admin actions</div></li>
+                  <li><a href="{{ route('categories.index') }}"><span class="glyphicon glyphicon-th-list"></span>Manage categories</a></li>
+                @endif
                 <li class="divider"></li>
                 <li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
                 <li><a href="{{ route('users.edit', Auth::user()->id) }}"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>

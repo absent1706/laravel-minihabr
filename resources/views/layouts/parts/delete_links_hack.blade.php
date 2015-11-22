@@ -24,8 +24,8 @@
 
         e.preventDefault();
 
-        // Allow user to optionally provide data-confirm="Are you sure?"
-        bootbox.confirm(link.data('confirm'), function(confirmed) {
+        // Allow user to optionally provide data-confirm="Are you sure to ...?"
+        bootbox.confirm(link.data('confirm') || 'Are you sure?', function(confirmed) {
             if (confirmed) {
               form = laravel.createForm(link);
               form.submit();
