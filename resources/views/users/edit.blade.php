@@ -32,13 +32,15 @@
             <h3 class="page-header">Set new password</h3>
             {!! Form::model($user, ['route' => ['users.update_password', $user->id], 'method' => 'PUT']) !!}
 
-               <div class="form-group {{ $errors->has('old_password') ? 'has-error' : '' }}">
-                  {!! Form::label('old_password', 'Current Password', ['class'=>'control-label']) !!}
-                  {!! Form::password('old_password', ['class'=>'form-control', 'placeholder'=>'Current Password']) !!}
-                  @if($errors->has('old_password'))
-                    <p class="help-block">{{ $errors->first('old_password')}}</p>
-                  @endif
-                </div>
+                @unless(Auth::user()->is_admin)
+                  <div class="form-group {{ $errors->has('old_password') ? 'has-error' : '' }}">
+                    {!! Form::label('old_password', 'Current Password', ['class'=>'control-label']) !!}
+                    {!! Form::password('old_password', ['class'=>'form-control', 'placeholder'=>'Current Password']) !!}
+                    @if($errors->has('old_password'))
+                      <p class="help-block">{{ $errors->first('old_password')}}</p>
+                    @endif
+                  </div>
+                @endunless
 
                 <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                   {!! Form::label('password', 'New Password', ['class'=>'control-label']) !!}

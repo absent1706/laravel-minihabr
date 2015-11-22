@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \View::composer('widgets.categories', function($view)
+        {
+            $view->with('categories', \App\Category::ordered()->get());
+        });
     }
 
     /**

@@ -55,6 +55,12 @@ Route::group(['middleware' => ['auth']], function()
 
 
 
+Route::resource('categories', 'CategoriesController', ['only' => 'index']);
+Route::group(['middleware' => ['auth', 'admin']], function()
+{
+    Route::resource('categories', 'CategoriesController',  ['except' => 'index', 'show']);
+});
+
 // Authentication routes...
 Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
 Route::post('auth/login', ['as' => 'login.post',  'uses' => 'Auth\AuthController@postLogin']);

@@ -4,9 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-use Auth;
-
-class UserUpdatePasswordRequest extends Request
+class CategoryRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +23,9 @@ class UserUpdatePasswordRequest extends Request
      */
     public function rules()
     {
-        $rules = [
-            'password' => 'required|confirmed|min:6',
+        return [
+            'name'  => 'required',
+            'order' => 'integer|min:0'
         ];
-        return $rules;
     }
 }
