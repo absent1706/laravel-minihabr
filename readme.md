@@ -4,6 +4,38 @@ See full, ready-to-run app versions (with db dumps and all dependencies) at full
 
 # Release notes
 
+## v0.4
+
+### Backend:
+1. ~ improved CommentController: added CommentRequest; adapted controller to handle AJAX requests (store method)
+
+2. +++ AJAX create comment:
+  2.1. + main AJAX code: see comments._create view. If all's OK, then success notification appears. If there're problems,
+
+  2.2. + frontend.allow_ajax_crud_requests option: sets whether to use AJAX for comment creating (further - for comment and post deleting too)
+         note: after changing config vars, don't forget to run php artisan config:cache
+
+  2.3. + modified app\Exceptions\Handler.php to return errors in JSON format, if request is AJAX
+         if config('app.debug') is true, then additional info provided (class name, message and stack trace)
+
+  2.4. + added default AJAX error handler (see app.js):
+           - response is always logged to console
+           - if it's a form validation error, then all errors are displayed as notification
+           - otherwise common error message appears.
+
+3. +++ AJAX delete comment:
+
+### Frontend:
+1. + Use pnotify.js for displaying ALL flash messages: regular and AJAX ones (see flash.blade.php)
+2. ~ Removed errors_list partial. Now all forms use help-blocks to display errors (except very specific login form which uses notifications)
+3. + loading indicator on AJAX requests
+4. + CSS class (list-split-hr) for automatically inserting hr lines after comments and articles
+
+### Refactoring:
+1. ~ moved JS includes to the head in _app.blade.php
+2. ~ moved global JS functions to app object
+3. ~ beautified code in routes.php
+
 ## v0.3
 
 ### backend features
