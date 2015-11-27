@@ -66,12 +66,14 @@ Route::group(['middleware' => ['auth', 'admin']], function()
 Route::get('auth/logout', ['as' => 'logout',      'uses' => 'Auth\AuthController@getLogout']);
 Route::group(['middleware' => 'guest'], function()
 {
-    // Authentication routes...
-    Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
-    Route::post('auth/login', ['as' => 'login.post',  'uses' => 'Auth\AuthController@postLogin']);
-
-    // Registration routes...
-    Route::get('auth/register',  ['as' => 'register',      'uses' => 'Auth\AuthController@getRegister']);
+    // Authentication & registration routes...
+    // // Registration routes...
+    Route::group(['middleware' => 'remember_return_url'], function()
+    {
+        Route::get('auth/login',    ['as' => 'login',    'uses' => 'Auth\AuthController@getLogin']);
+        Route::get('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@getRegister']);
+    });
+    Route::post('auth/login',    ['as' => 'login.post',    'uses' => 'Auth\AuthController@postLogin']);
     Route::post('auth/register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@postRegister']);
 
     // Password reset link request routes...

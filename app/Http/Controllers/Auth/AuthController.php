@@ -29,19 +29,7 @@ class AuthController extends Controller
       AuthenticatesAndRegistersUsers::postRegister as traitPostRegister;
     }
 
-
     protected $redirectTo='/articles';
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest', ['except' => 'getLogout']);
-        $this->middleware('remember_return_url', ['only' => ['getLogin', 'getRegister']]);
-    }
 
     /**
      * Get a validator for an incoming registration request.
