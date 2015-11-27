@@ -49,7 +49,6 @@
   </head>
 
   <body>
-
    <!-- Static navbar -->
    <nav class="navbar navbar-default">
     <div class="container">
@@ -148,6 +147,14 @@
     </footer>
 
   <div class="loading-indicator"><div class="whirl traditional"></div></div>
+  @if(config('app.debug'))
+    Request params:
+    {{ var_dump(request()->input()) }}
+    Errors:
+    {{ var_dump($errors->all()) }}
+    Session variables:
+    {{ var_dump(session()->all()) }}
+  @endif
   </div>
   <!-- /.container -->
 </body>
