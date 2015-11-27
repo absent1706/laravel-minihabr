@@ -1,4 +1,4 @@
-<?php isset($category_id) ?: $category_id ='' ?>
+<?php $current_category = isset($filters['cat']) ? $filters['cat'] : null; ?>
 <div class="panel panel-default sidebar">
   <div class="panel-heading">
     <div class="panel-title inline-block">Categories</div>
@@ -12,10 +12,9 @@
     @endif
   </div>
   <div class="list-group">
-    {{-- TODO: remove getting data in partial (see laravel fundamentals 25 - When You Want a View Partial to Always Receive Data.mp4) --}}
     @foreach ($categories as $category)
         {!! link_to_route('articles.index', $category->name, ['cat' => $category->id],
-                          ['class' => 'list-group-item'.(($category->id == $category_id) ? ' active' : '')]
+                          ['class' => 'list-group-item'.(($category->id == $current_category) ? ' active' : '')]
                          ) !!}
     @endforeach
   </div>

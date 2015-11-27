@@ -42,7 +42,11 @@ class ArticlesController extends Controller
 
         $articles = $articles->paginate(Config::get('frontend.articles_per_page'));
 
-        return view('articles.index', compact('articles', 'sort', 'category_id'));
+        return view('articles.index', [
+            'articles' => $articles,
+            'filters'  => ['cat' => $category_id],
+            'sort'     => $sort
+        ]);
     }
 
     /**
