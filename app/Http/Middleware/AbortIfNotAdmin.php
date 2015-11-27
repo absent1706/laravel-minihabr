@@ -19,7 +19,7 @@ class AbortIfNotAdmin
     public function handle($request, Closure $next)
     {
         if (!Auth::user()->is_admin) {
-            return abort(403);
+            return redirect('/');
         }
 
         return $next($request);

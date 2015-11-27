@@ -18,10 +18,10 @@ class AbortIfCantManageUser
      */
     public function handle($request, Closure $next)
     {
-        $user = User::findOrFail($request->route()->parameter('users'));
+        $user = User::find($request->route()->parameter('users'));
 
-        if (!can_manage_user($user)) {
-            return abort(403);
+        if (!$user || !can_manage_user($user)) {
+            return redirect('/');
         }
 
         return $next($request);

@@ -18,10 +18,10 @@ class AbortIfCantManageComment
      */
     public function handle($request, Closure $next)
     {
-        $comment = Comment::findOrFail($request->route()->parameter('comments'));
+        $comment = Comment::find($request->route()->parameter('comments'));
 
-        if (!can_manage_comment($comment)) {
-            return abort(403);
+        if (!$comment || !can_manage_comment($comment)) {
+            return redirect('/');
         }
 
         return $next($request);

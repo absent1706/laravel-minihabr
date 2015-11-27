@@ -18,10 +18,10 @@ class AbortIfCantManageArticle
      */
     public function handle($request, Closure $next)
     {
-        $article = Article::findOrFail($request->route()->parameter('articles'));
+        $article = Article::find($request->route()->parameter('articles'));
 
-        if (!can_manage_article($article)) {
-            return abort(403);
+        if (!$article || !can_manage_article($article)) {
+            return redirect('/');
         }
 
         return $next($request);
