@@ -4,6 +4,27 @@ See full, ready-to-run app versions (with db dumps and all dependencies) at full
 
 # Release notes
 
+## v0.7
+Added password reset, simplified user edit logic
+
+### Backend:
+1. + password reset by email; set up fake email sending by means of https://mailtrap.io
+2. +~ simplified user edit logic:
+ * now all fields (including email from this version) can be edited throw SINGLE request (update password request is not a different request now), but current password is always required
+ * changed password update logic (it's done more clear now)
+3. * after logout, redirect to root page (not back)
+
+### Refactoring:
+1. moved auth middleware registration to routes.php
+2. normalized 'home' routes:
+ * removed '/articles' URL.
+ * now we have '/' URL with name 'articles.index' (main route) and '/home' URL named 'home' for compatibility with Laravel redirects
+3. middleware: if not permitted, redirect to /, not throw 403. It's important because when I log out from user/article edit page and logout controller redirects me back (as it was in prev versions), I should NOT see 403.
+
+
+### Frontend:
+1. + log request params, errors and all session vars in the bottom of layout
+
 ## v0.6
 Improved arcticle filtering system
 
