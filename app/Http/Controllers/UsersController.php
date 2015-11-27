@@ -50,26 +50,22 @@ class UsersController extends Controller
     public function update(Requests\UserUpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->update($request->except(['email', 'password']));
 
-        return redirect()->back()->with([
-            'flash_message' => 'User profile has been updated successfully!'
-        ]);
-    }
+        if(Auth::user()->is_admin || Auth::validate(['email' => $user->email, 'password' => $request->old_password]))
+        {
+            $user->fill($request->except('password'));
+            if ($new_password = $request->password) {
+                $user->password = bcrypt($new_password);
+            }
 
-    public function updatePassword(Requests\UserUpdatePasswordRequest $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        if(Auth::user()->is_admin || Hash::check(Input::get('old_password'), $user->getAuthPassword())) {
-            $user->update(['password' => Hash::make(Input::get('password'))]);
-        } else {
+            $user->save();
+            return redirect()->back()->with([
+                'flash_message' => 'User profile has been updated successfully!'
+            ]);
+        }
+        else {
             return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect']);
         }
-
-        return redirect()->back()->with([
-            'flash_message' => 'User password has been updated successfully!'
-        ]);
     }
 
     /**
