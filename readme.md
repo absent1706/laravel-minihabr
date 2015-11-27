@@ -5,6 +5,8 @@ See full, ready-to-run app versions (with db dumps and all dependencies) at full
 # Release notes
 
 ## v0.6
+Improved arcticle filtering system
+
 ### Refactoring:
 1. add ability to sort articles PRESERVING current filters (category)
 2. made filter system extensible: all filters are in filters array. Now the only filter is category, but in future it will be possible to add another filters
