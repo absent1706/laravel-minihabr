@@ -16,8 +16,8 @@
 //     var_dump($query);
 // });
 
-Route::get('/',    ['as' => 'home', 'uses' => 'ArticlesController@index']);
-Route::get('home', [                'uses' => 'ArticlesController@index']);
+Route::get('/',    ['as' => 'articles.index', 'uses' => 'ArticlesController@index']);
+Route::get('home', ['as' => 'home',           'uses' => 'ArticlesController@index']);
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function()
 });
 
 // it's important to define articles.show AFTER articles.create because it can be incorrect routing at /articles/create
-Route::resource('articles', 'ArticlesController',  ['only' => ['index', 'show']]);
+Route::resource('articles', 'ArticlesController',  ['only' => ['show']]);
 
 
 Route::resource('users', 'UsersController', ['only' => 'show']);

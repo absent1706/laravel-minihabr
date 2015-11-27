@@ -61,7 +61,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="{{ route('home') }}">MiniHabr</a>
+          <a class="navbar-brand" href="{{ url('/') }}">MiniHabr</a>
 {{--           <div class="input-group search">
             <input type="text" class="form-control" size="50">
             <span class="input-group-btn">

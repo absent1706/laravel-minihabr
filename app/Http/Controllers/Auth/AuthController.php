@@ -29,8 +29,6 @@ class AuthController extends Controller
       AuthenticatesAndRegistersUsers::postRegister as traitPostRegister;
     }
 
-    protected $redirectTo='/articles';
-
     /**
      * Get a validator for an incoming registration request.
      *

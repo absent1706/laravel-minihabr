@@ -109,7 +109,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->update($request->all());
 
-        return redirect('articles')->with([
+        return redirect(route('articles.index'))->with([
             'flash_message' => 'Article has been updated successfully!',
         ]);
     }
@@ -125,7 +125,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         $article->delete();
 
-        return redirect('articles')->with([
+        return redirect(route('articles.index'))->with([
             'flash_message' => 'Article has been deleted successfully!',
         ]);
     }
