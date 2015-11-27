@@ -7,7 +7,7 @@
 
 <div>
   <h1>Articles</h1>
-  <?php isset($sort) ?: $sort ='' ?>
+  <?php $sort = isset($QUERY['sort']) ? $QUERY['sort'] : '' ; ?>
   <ul class="nav nav-pills nav-justified link-list-justified">
     <li class="{{ ($sort == '') ? 'active' : '' }}"><a href="{{ route('articles.index', $appendQuery) }}"><span class="glyphicon glyphicon-time"></span>Recent</a></li>
     {{-- <li class="{{ ($sort == 'most-viewed') ? 'active' : '' }}"><a href="{{ action('ArticlesController@index').'/most-viewed' }}"><span class="glyphicon glyphicon-eye-open"></span>Most viewed</a></li> --}}

@@ -1,4 +1,4 @@
-<?php $current_category = isset($filters['cat']) ? $filters['cat'] : null; ?>
+<?php $current_category = isset($QUERY['cat']) ? $QUERY['cat'] : null; ?>
 <div class="panel panel-default sidebar">
   <div class="panel-heading">
     <div class="panel-title inline-block">Categories</div>
