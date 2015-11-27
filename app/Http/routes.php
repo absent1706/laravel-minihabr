@@ -16,7 +16,8 @@
 //     var_dump($query);
 // });
 
-Route::get('/', ['as' => 'home', 'uses' => 'ArticlesController@index']);
+Route::get('/',    ['as' => 'home', 'uses' => 'ArticlesController@index']);
+Route::get('home', [                'uses' => 'ArticlesController@index']);
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -61,13 +62,23 @@ Route::group(['middleware' => ['auth', 'admin']], function()
     Route::resource('categories', 'CategoriesController',  ['except' => 'index', 'show']);
 });
 
-// Authentication routes...
-Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
-Route::post('auth/login', ['as' => 'login.post',  'uses' => 'Auth\AuthController@postLogin']);
+
 Route::get('auth/logout', ['as' => 'logout',      'uses' => 'Auth\AuthController@getLogout']);
+Route::group(['middleware' => 'guest'], function()
+{
+    // Authentication routes...
+    Route::get('auth/login',  ['as' => 'login',       'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('auth/login', ['as' => 'login.post',  'uses' => 'Auth\AuthController@postLogin']);
 
-// Registration routes...
-Route::get('auth/register',  ['as' => 'register',      'uses' => 'Auth\AuthController@getRegister']);
-Route::post('auth/register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@postRegister']);
+    // Registration routes...
+    Route::get('auth/register',  ['as' => 'register',      'uses' => 'Auth\AuthController@getRegister']);
+    Route::post('auth/register', ['as' => 'register.post', 'uses' => 'Auth\AuthController@postRegister']);
 
-// Route::resource('foo.bar.bez', 'Foo\Bar\BezController'); // For accessing Bez related with Foo and Bar
+    // Password reset link request routes...
+    Route::get('password/email',  ['as' => 'password_reset_links.create', 'uses' => 'Auth\PasswordController@getEmail']);
+    Route::post('password/email', ['as' => 'password_reset_links.store',  'uses' => 'Auth\PasswordController@postEmail']);
+
+    // Password reset routes...
+    Route::get('password/reset/{user_id}/{token}', ['as' => 'password_resets.create', 'uses' => 'Auth\PasswordController@getReset']);
+    Route::post('password/reset',                  ['as' => 'password_resets.store',  'uses' => 'Auth\PasswordController@postReset']);
+});

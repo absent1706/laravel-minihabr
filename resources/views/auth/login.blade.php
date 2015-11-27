@@ -25,6 +25,7 @@
 
     <div class="form-group">
       {!! Form::label('password', 'Your Password', ['class'=>'control-label']) !!}
+      {!! link_to_route('password_reset_links.create', '(forgot password)') !!}
       {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Password']) !!}
     </div>
 
@@ -37,7 +38,6 @@
     <p class="text-center">
       {!! link_to_route('register', 'Create an account') !!}
     </p>
-
   </div>
 </div>
 @endsection
