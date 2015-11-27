@@ -1,6 +1,6 @@
 # MiniHabr
 
-See full, ready-to-run app versions (with db dumps and all dependencies) at full_app_releases_archive folder.
+## !!! See full, ready-to-run app versions (with db dumps, vendors and .git folder) at https://github.com/absent1706/laravel-minihabr-full-app-releases
 
 # Release notes
 
