@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
         {
             $view->with('categories', \App\Category::ordered()->get());
         });
+
+        \View::composer('articles.index', function($view)
+        {
+            $view->with('QUERY', \Request::query());
+        });
     }
 
     /**
