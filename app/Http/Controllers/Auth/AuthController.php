@@ -64,7 +64,7 @@ class AuthController extends Controller
     public function getLogout()
     {
         Auth::logout();
-        return redirect()->back()->with([
+        return redirect('/')->with([
             'flash_message' => 'You have been successfully logged out!',
         ]);
     }
