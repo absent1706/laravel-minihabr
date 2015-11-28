@@ -84,3 +84,9 @@ Route::group(['middleware' => ['auth', 'abort_if_cant_manage_user']], function()
 
 Route::resource('users.articles', 'UserArticlesController', ['only' => 'index']);
 Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);
+
+// follow-related routes
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resource('users.followers', 'UserFollowersController', ['only' => ['store', 'destroy']]);
+});
