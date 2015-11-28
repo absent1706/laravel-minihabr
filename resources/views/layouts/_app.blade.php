@@ -151,7 +151,7 @@
     Request params:
     {{ var_dump(request()->input()) }}
     Errors:
-    {{ var_dump($errors->all()) }}
+    {{ var_dump($errors->getMessages()) }}
     Session variables:
     {{ var_dump(session()->all()) }}
   @endif

@@ -7,9 +7,7 @@
     @if ($errors->any())
         <script>
             $(function() {
-                @foreach ($errors->all() as $error)
-                    notify('{{ $error }}', 'error');
-                @endforeach
+              notify('These credentials do not match our records', 'error');
             });
         </script>
     @endif

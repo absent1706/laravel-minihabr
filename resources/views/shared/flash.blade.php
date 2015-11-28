@@ -9,3 +9,18 @@
     });
 </script>
 @endif
+
+{{-- display errors not attached to any form field  --}}
+@if($errors->any())
+<script>
+    $(function() {
+        @foreach($errors->getMessages() as $field => $errors)
+            @if(is_int($field))
+                @foreach($errors as $error)
+                    notify( "{{ $error }}", "error" );
+                @endforeach
+            @endif
+        @endforeach
+    });
+</script>
+@endif
