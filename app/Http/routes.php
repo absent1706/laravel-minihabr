@@ -16,9 +16,11 @@
 //     var_dump($query);
 // });
 
+/* =============================== General/static routes ================================ */
 Route::get('/',    ['as' => 'articles.index', 'uses' => 'ArticlesController@index']);
 Route::get('home', ['as' => 'home',           'uses' => 'ArticlesController@index']);
 
+/* =============================== Articles routes ================================ */
 Route::group(['middleware' => ['auth']], function()
 {
     Route::resource('articles', 'ArticlesController',  ['only' => ['create', 'store']]);
@@ -32,18 +34,7 @@ Route::group(['middleware' => ['auth']], function()
 // it's important to define articles.show AFTER articles.create because it can be incorrect routing at /articles/create
 Route::resource('articles', 'ArticlesController',  ['only' => ['show']]);
 
-
-Route::resource('users', 'UsersController', ['only' => 'show']);
-Route::group(['middleware' => ['abort_if_cant_manage_user']], function()
-{
-    Route::resource('users', 'UsersController',  ['only' => ['edit', 'update', 'destroy']]);
-    Route::put('users/{users}/password', ['uses' => 'UsersController@updatePassword', 'as' => 'users.update_password']);
-});
-
-Route::resource('users.articles', 'UserArticlesController', ['only' => 'index']);
-Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);
-
-
+/* =============================== Comments routes ================================ */
 Route::group(['middleware' => ['auth']], function()
 {
     Route::resource('comments', 'CommentsController', ['only' => 'store']);
@@ -54,15 +45,14 @@ Route::group(['middleware' => ['auth']], function()
     });
 });
 
-
-
+/* =============================== Categories routes ================================ */
 Route::resource('categories', 'CategoriesController', ['only' => 'index']);
 Route::group(['middleware' => ['auth', 'admin']], function()
 {
     Route::resource('categories', 'CategoriesController',  ['except' => 'index', 'show']);
 });
 
-
+/* =============================== Authorization-related routes ================================ */
 Route::get('auth/logout', ['as' => 'logout',      'uses' => 'Auth\AuthController@getLogout']);
 Route::group(['middleware' => 'guest'], function()
 {
@@ -84,3 +74,13 @@ Route::group(['middleware' => 'guest'], function()
     Route::get('password/reset/{user_id}/{token}', ['as' => 'password_resets.create', 'uses' => 'Auth\PasswordController@getReset']);
     Route::post('password/reset',                  ['as' => 'password_resets.store',  'uses' => 'Auth\PasswordController@postReset']);
 });
+
+/* =============================== Users-related routes ================================ */
+Route::resource('users', 'UsersController', ['only' => 'show']);
+Route::group(['middleware' => ['auth', 'abort_if_cant_manage_user']], function()
+{
+    Route::resource('users', 'UsersController',  ['only' => ['edit', 'update', 'destroy']]);
+});
+
+Route::resource('users.articles', 'UserArticlesController', ['only' => 'index']);
+Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);

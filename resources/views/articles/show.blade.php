@@ -21,7 +21,7 @@
 <hr class="border-transparent">
 
 <ul id="comments" class="list-unstyled list-split-hr">
-    @foreach ($article->comments as $comment)
+    @foreach ($article->comments->sortByDesc('created_at') as $comment)
         <li>
             @include('comments._single')
         </li>
@@ -42,7 +42,7 @@
                 success: function( result ) {
                     $(form).trigger('reset'); // reset all fields in a form
 
-                    $('#comments').append('<li>' + result.html + '\n</li>\n'); // display created comment
+                    $('#comments').prepend('<li>' + result.html + '\n</li>\n'); // display created comment
 
                     var comment_counter = $('.comment-counter');
                     comment_counter.html(parseInt(comment_counter.html()) + 1); // increase comment counter
