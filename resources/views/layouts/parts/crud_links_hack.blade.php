@@ -16,21 +16,28 @@
         var httpMethod = link.data('method').toUpperCase();
         var form;
 
-        // If the data-method attribute is not PUT or DELETE,
+        // If the data-method attribute is not POST, PUT or DELETE,
         // then we don't know what to do. Just ignore.
-        if ( $.inArray(httpMethod, ['PUT', 'DELETE']) === - 1 ) {
+        if ( $.inArray(httpMethod, ['POST', 'PUT', 'DELETE']) === - 1 ) {
           return;
         }
 
         e.preventDefault();
 
         // Allow user to optionally provide data-confirm="Are you sure to ...?"
-        bootbox.confirm(link.data('confirm') || 'Are you sure?', function(confirmed) {
+        if (link.data('confirm')) {
+          bootbox.confirm(link.data('confirm'), function(confirmed) {
             if (confirmed) {
               form = laravel.createForm(link);
               form.submit();
             }
-        });
+          });
+        }
+        // if no data-confirm attribute provided, we just send form
+        else {
+          form = laravel.createForm(link);
+          form.submit();
+        }
       },
 
       createForm: function(link) {

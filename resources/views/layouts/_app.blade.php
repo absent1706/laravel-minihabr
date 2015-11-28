@@ -44,7 +44,7 @@
   <!-- App main JS -->
   <script src="{{ URL::asset('js/app.js') }}"></script>
 
-  @include('layouts.parts.delete_links_hack')
+  @include('layouts.parts.crud_links_hack')
 
   </head>
 
