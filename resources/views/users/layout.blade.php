@@ -27,5 +27,30 @@
 
 @yield('user_info')
 
+@if (auth()->check() && config('frontend.allow_ajax_crud_requests'))
+    <script>
+    // attach event to dynamically created elements - forms created from delete links
+    $(document).on('submit', '.form-from-link.follow-button', function(e) {
+        e.preventDefault();
+        form = this;
+        $.ajax({
+            type: form.method,
+            url:  form.action,
+            data: $(form).serialize(),
+            dataType: 'json',
+            success: function( result ) {
+                // replace button by the new one came from server and notify success
+                var userId = $(form).data('userId');
+                var button = $('.follow-button[data-user-id="' + userId + '"]');
+                button.hide().after(result.html).remove();
+
+                notify(result.flash_message, result.flash_class);
+            },
+            error: function(jqXHR) {app.defaultAjaxError(form, jqXHR);}
+        });
+    });
+    </script>
+@endif
+
 @stop
 

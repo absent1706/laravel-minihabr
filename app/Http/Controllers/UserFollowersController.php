@@ -25,19 +25,26 @@ class UserFollowersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
         if ($user->id == Auth::user()->id) {
-            return redirect()->back()->withErrors("You can't follow youself!");
+            $error = "You can't follow youself!";
         }
         if (Auth::user()->does_follow($user)) {
-            return redirect()->back()->withErrors("You've already subscribed to $user->name!");
+            $error = "You've already subscribed to $user->name!";
+        }
+        if (isset($error)) {
+            return ($request->ajax()) ? response()->json([$error], 422) : redirect()->back()->withErrors($error);
         }
 
         Auth::user()->follow($user);
-        return redirect()->back()->with(['flash_message' => "You're following $user->name now"]);
+
+        $flash = ['flash_message' => "You're following $user->name now"];
+        return ($request->ajax())
+                   ? response()->json($flash + ['html' => view('users._follow_button', compact('user'))->render()])
+                   : redirect()->back()->with($flash);
     }
 
     /**
@@ -47,21 +54,26 @@ class UserFollowersController extends Controller
      * @param  int  $follower_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $follower_id)
+    public function destroy(Request $request, $id, $follower_id)
     {
         $user = User::findOrFail($id);
 
         // it's not permitted to unsubscribe another user
         // TODO: special function can_unsubsrcribe_user() can be created and checked within middleware
         if ($follower_id != Auth::user()->id) {
-            return redirect('/');
+            return ($request->ajax()) ? response()->json(['Wrong request'], 400) : redirect('/');
         }
 
         if (!Auth::user()->does_follow($user)) {
-            return redirect()->back()->withErrors("You aren't subscribed to $user->name!");
+            $error = "You aren't subscribed to $user->name. Please, refresh page";
+            return ($request->ajax()) ? response()->json([$error], 422) : redirect()->back()->withErrors($error);
         }
 
         Auth::user()->unfollow($user);
-        return redirect()->back()->with(['flash_message' => "You've stopped following $user->name"]);
+
+        $flash = ['flash_message' => "You've stopped following $user->name"];
+        return ($request->ajax())
+                   ? response()->json($flash + ['html' => view('users._follow_button', compact('user'))->render()])
+                   : redirect()->back()->with($flash);
     }
 }
