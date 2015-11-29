@@ -34,16 +34,25 @@ app = {
 
         // if error is form validation error, collect all errors to array and display them as notification
         if (errors && jqXHR.status == 422) {
-            $(form).find(':input').each(
-                function(index){
-                    var field = $(this);
-                    var fieldname = $(this).attr('name');
-                    if(errors.hasOwnProperty(fieldname )) {
-                       field.after('<p class="help-block">'+errors[fieldname]+'</p>');
-                       field.closest('.form-group').addClass('has-error');
+
+            // function is taken from http://www.inventpartners.com/javascript_is_int
+            function is_int(value) { return ((parseFloat(value) == parseInt(value)) && !isNaN(value)) }
+
+            $.each(errors, function(field, error) {
+                // if error not is attached to form field, just display it
+                if (is_int(field)) {
+                    notify(error, 'error');
+                }
+                // if error is attached to form field, try to display error under form field
+                else {
+                    var field = $(form).find(':input[name="' + field + '"]');
+                    // if corresponding field exists, display error under this field
+                    if (field.length) {
+                        field.after('<p class="help-block">'+error+'</p>');
+                        field.closest('.form-group').addClass('has-error');
                     }
                 }
-            );
+            });
         }
         // for other errors just throw common error notification
         else {
