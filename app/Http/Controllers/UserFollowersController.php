@@ -12,6 +12,13 @@ use Auth;
 
 class UserFollowersController extends Controller
 {
+    public function index($id)
+    {
+        $user = User::findOrFail($id);
+        $followers = $user->followers()->paginate(config('frontend.users_per_page'));
+        return view('users.user_followers', compact('user', 'followers'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -86,6 +86,8 @@ Route::resource('users.articles', 'UserArticlesController', ['only' => 'index'])
 Route::resource('users.comments', 'UserCommentsController', ['only' => 'index']);
 
 // follow-related routes
+Route::resource('users.followed_users', 'UserFollowedUsersController', ['only' => 'index']);
+Route::resource('users.followers',      'UserFollowersController',     ['only' => 'index']);
 Route::group(['middleware' => 'auth'], function()
 {
     Route::resource('users.followers', 'UserFollowersController', ['only' => ['store', 'destroy']]);
