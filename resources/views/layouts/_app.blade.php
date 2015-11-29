@@ -154,6 +154,8 @@
     {{ var_dump($errors->getMessages()) }}
     Session variables:
     {{ var_dump(session()->all()) }}
+    Query log:
+    {{ var_dump(DB::getQueryLog()) }}
   @endif
   </div>
   <!-- /.container -->

@@ -13,6 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('app.debug')) {
+            \DB::enableQueryLog();
+        }
+
         \View::composer('widgets.categories', function($view)
         {
             $view->with('categories', \App\Category::ordered()->get());
