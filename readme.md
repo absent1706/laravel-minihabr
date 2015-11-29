@@ -4,6 +4,31 @@
 
 # Release notes
 
+## v0.8
+User follows feature
+
+### Backend:
+1. ++ user follows:
+ * AJAX follow button
+ * display followers and followed users on user page
+2. * fixed articles table creation: added foreign key on user_id
+
+### Frontend:
+1. + display errors NOT attached to form field as notifications (needed if general errors occured):
+ * in shared.flash partial
+ * in AJAX error handler (app.s)
+2. ~+ login form: always display ONE, STANDARD message if any error occured (less code, more secure)
+3. + more detailly log errors in debug area (bottom of _app layout) (use getMessages() instead of all() )
+4. + log DB queries in debug area (bottom of _app layout)
+
+### Refactoring:
+0. structurized and commented routes.php; removed unused passwordUpdate route
+1. delete_links_hack partial:
+ * renamed delete_links_hack -> crud_links_hack
+ * allow links with data-method=POST to be handled with crud-links-hack
+ * if data-confirm is NOT set, hack will send form without confirming (previously there was a default confirm text 'Are you sure?')
+
+
 ## v0.7
 Added password reset, simplified user edit logic
 
