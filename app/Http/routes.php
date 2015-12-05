@@ -99,3 +99,10 @@ Route::group(['middleware' => ['auth', 'abort_if_cant_see_user_recently_viewed_a
     Route::resource('users.recently_viewed_articles', 'UserRecentlyViewedArticlesController', ['only' => 'index']);
 });
 
+// recently viewed articles
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resource('articles.stars', 'ArticleStarsController', ['only' => ['store']]);
+    Route::delete('articles/{articles}/stars', ['as' => 'articles.stars.destroy', 'uses' => 'ArticleStarsController@destroy']);
+});
+

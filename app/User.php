@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use Carbon\Carbon;
 use App\UserFollow;
+use DB;
+
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -47,6 +49,19 @@ class User extends Model implements AuthenticatableContract,
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function starred_articles()
+    {
+        return DB::table('articles')
+                    ->join('stars', 'articles.id', '=', 'stars.article_id')
+                    ->join('users', 'users.id', '=', 'stars.user_id')
+                    ->where('users.id' , '=', $this->id);
+    }
+
+    public function starred($article)
+    {
+       return (bool)$this->starred_articles()->where('articles.id' , '=', $article->id)->count();
     }
 
     public function followed_users()

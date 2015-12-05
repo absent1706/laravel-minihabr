@@ -127,3 +127,7 @@ footer {
 .list-users .user .username {
     margin-top: 6px;
 }
+
+.active-star {
+    color: orange;
+}

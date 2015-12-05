@@ -36,6 +36,11 @@ class Article extends Model
         return $this->hasMany('App\View');
     }
 
+    public function stars()
+    {
+        return $this->hasMany('App\Star');
+    }
+
     public function scopeRecentlyViewedBy($query, $user)
     {
         return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, max(views.created_at)'))
