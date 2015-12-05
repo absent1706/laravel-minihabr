@@ -21,6 +21,10 @@
     <li class="{{ ($active_page == 'comments')       ? 'active' : '' }}"><a href="{{ route('users.comments.index',       $user->id) }}"><span class="glyphicon glyphicon-comment"></span>Comments</a></li>
     <li class="{{ ($active_page == 'followers')      ? 'active' : '' }}"><a href="{{ route('users.followers.index',      $user->id) }}"><span class="glyphicon glyphicon-arrow-right"></span><span class="glyphicon glyphicon-user"></span>Followers</a></li>
     <li class="{{ ($active_page == 'followed_users') ? 'active' : '' }}"><a href="{{ route('users.followed_users.index', $user->id) }}"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-arrow-right"></span>Follows</a></li>
+    
+    @if(can_see_user_recently_viewed_articles($user))
+        <li class="{{ ($active_page == 'recently_viewed_articles') ? 'active' : '' }}"><a href="{{ route('users.recently_viewed_articles.index', $user->id) }}"><span class="glyphicon glyphicon-eye-open"></span>Views</a></li>
+    @endif
 
     {{-- <li><a href="user-1-favorites.html"><span class="glyphicon glyphicon-star"></span>Favorites</a></li> --}}
 </ul>

@@ -29,3 +29,12 @@ function can_manage_user($managedUser, $managingUser = null)
     // if user found and this user is the entity author, return TRUE
     return ($managingUser && (($managingUser->id == $managedUser->id) || $managingUser->is_admin));
 }
+
+function can_see_user_recently_viewed_articles($viewedUser, $viewer = null)
+{
+    // try to obtain current user
+    if (!$viewer && \Auth::check()) $viewer = \Auth::user();
+
+    // if user found and this user is the entity author, return TRUE
+    return ($viewer && (($viewer->id == $viewedUser->id) || $viewer->is_admin));
+}

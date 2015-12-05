@@ -26,13 +26,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'                         => \App\Http\Middleware\Authenticate::class,
-        'auth.basic'                   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest'                        => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'admin'                        => \App\Http\Middleware\AbortIfNotAdmin::class,
-        'remember_return_url'          => \App\Http\Middleware\RememberReturnUrl::class,
-        'abort_if_cant_manage_article' => \App\Http\Middleware\AbortIfCantManageArticle::class,
-        'abort_if_cant_manage_comment' => \App\Http\Middleware\AbortIfCantManageComment::class,
-        'abort_if_cant_manage_user'    => \App\Http\Middleware\AbortIfCantManageUser::class,
+        'auth'                                            => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'                                      => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest'                                           => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin'                                           => \App\Http\Middleware\AbortIfNotAdmin::class,
+        'remember_return_url'                             => \App\Http\Middleware\RememberReturnUrl::class,
+        'abort_if_cant_manage_article'                    => \App\Http\Middleware\AbortIfCantManageArticle::class,
+        'abort_if_cant_manage_comment'                    => \App\Http\Middleware\AbortIfCantManageComment::class,
+        'abort_if_cant_manage_user'                       => \App\Http\Middleware\AbortIfCantManageUser::class,
+        'abort_if_cant_see_user_recently_viewed_articles' => \App\Http\Middleware\AbortIfCantSeeUserRecentlyViewedArticles::class,
     ];
 }

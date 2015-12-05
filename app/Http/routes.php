@@ -92,3 +92,10 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::resource('users.followers', 'UserFollowersController', ['only' => ['store', 'destroy']]);
 });
+
+// recently viewed articles
+Route::group(['middleware' => ['auth', 'abort_if_cant_see_user_recently_viewed_articles']], function()
+{
+    Route::resource('users.recently_viewed_articles', 'UserRecentlyViewedArticlesController', ['only' => 'index']);
+});
+

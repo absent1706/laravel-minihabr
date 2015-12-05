@@ -36,6 +36,16 @@ class Article extends Model
         return $this->hasMany('App\View');
     }
 
+    public function scopeRecentlyViewedBy($query, $user)
+    {
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, max(views.created_at)'))
+            ->leftJoin('views', 'views.article_id' , '=', 'articles.id')
+            ->leftJoin('users', 'views.user_id'    , '=', 'users.id')
+            ->where('views.user_id', '=', $user->id)
+            ->groupBy('articles.id')
+        ->orderBy(\Illuminate\Support\Facades\DB::raw('views.created_at'), 'desc');
+    }
+
     public function scopeMostViewed($query)
     {
         return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, COUNT(views.article_id) as views_count_aggregated'))
