@@ -18,7 +18,7 @@
                     @if(Auth::check() && Auth::user()->is_admin)
                         <div class="pull-right">
                             {!! link_to_route('categories.edit', 'Edit', $category->id, ['class' => 'btn btn-primary']) !!}
-                            {!! link_to_route('categories.destroy', 'Delete', $category->id, ['data-method' => 'delete', 'class' => 'btn btn-danger']) !!}
+                            {!! link_to_route('categories.destroy', 'Delete', $category->id, ['data-method' => 'delete', 'data-confirm' => 'Do you really want to delete category and ALL CATEGORY ARTICLES ?', 'class' => 'btn btn-danger']) !!}
                         </div>
                     @endif
                 </li>
