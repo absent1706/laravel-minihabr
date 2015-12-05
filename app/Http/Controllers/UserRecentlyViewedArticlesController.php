@@ -20,8 +20,8 @@ class UserRecentlyViewedArticlesController extends Controller
      */
     public function index($user_id)
     {
-        $user = User::findOrFail($user_id); 
-        $articles = Article::recentlyViewedBy($user)->paginate(config('frontend.articles_per_page'));
+        $user = User::findOrFail($user_id);
+        $articles = Article::recentlyViewedBy($user)->with(['user','category', 'comments', 'views'])->paginate(config('frontend.articles_per_page'));
 
         return view('users.user_recently_viewed_articles', compact('user', 'articles'));
     }

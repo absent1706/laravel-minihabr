@@ -25,7 +25,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::with(['user','category', 'comments']);
+        $articles = Article::with(['user','category', 'comments', 'views']);
 
         $sort = Request::get('sort');
         if ($sort == 'most-commented')  $articles = $articles->mostCommented();
