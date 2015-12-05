@@ -50,6 +50,15 @@ class Article extends Model
         ->orderBy(\Illuminate\Support\Facades\DB::raw('max(views.created_at)'), 'desc');
     }
 
+    public function scopeStarredBy($query, $user)
+    {
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*'))
+            ->join('stars', 'stars.article_id' , '=', 'articles.id')
+            ->where('stars.user_id', '=', $user->id)
+            ->groupBy('articles.id')
+        ->orderBy(\Illuminate\Support\Facades\DB::raw('stars.created_at'), 'desc');
+    }
+
     public function scopeMostViewed($query)
     {
         return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, COUNT(views.article_id) as views_count_aggregated'))
