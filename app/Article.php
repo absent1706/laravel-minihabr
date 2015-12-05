@@ -67,9 +67,11 @@ class Article extends Model
         ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(comments.article_id)'), 'desc');
     }
 
-    // public function scopeMostRated($query)
-    // {
-    //     // HARDCODE
-    //     return $query->orderBy('created_at', 'desc');
-    // }
+    public function scopeMostStarred($query)
+    {
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, COUNT(stars.article_id) as stars_count_aggregated'))
+            ->leftJoin('stars', 'stars.article_id' , '=', 'articles.id')
+            ->groupBy('articles.id')
+        ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(stars.article_id)'), 'desc');
+    }
 }

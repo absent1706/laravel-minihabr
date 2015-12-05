@@ -25,12 +25,12 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::with(['user','category', 'comments', 'views']);
+        $articles = Article::with(['user','category', 'comments', 'views', 'stars']);
 
         $sort = Request::get('sort');
-        if ($sort == 'most-commented')  $articles = $articles->mostCommented();
-        elseif ($sort == 'most-viewed') $articles = $articles->mostViewed();
-        // elseif ($sort == 'most-rated')     $articles = $articles->mostRated();
+        if ($sort == 'most-commented')   $articles = $articles->mostCommented();
+        elseif ($sort == 'most-viewed')  $articles = $articles->mostViewed();
+        elseif ($sort == 'most-starred') $articles = $articles->mostStarred();
         else {
             $sort = '';
             $articles = $articles->recent();
