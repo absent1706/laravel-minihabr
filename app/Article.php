@@ -43,7 +43,7 @@ class Article extends Model
 
     public function scopeRecentlyViewedBy($query, $user)
     {
-        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, max(views.created_at)'))
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*'))
             ->join('views', 'views.article_id' , '=', 'articles.id')
             ->where('views.user_id', '=', $user->id)
             ->groupBy('articles.id')
