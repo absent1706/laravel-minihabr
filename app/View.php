@@ -5,11 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\Parsing;
 
-use App\Traits\Filterable;
-
 class View extends Model {
-
-    use Filterable;
 
     protected $fillable = [
         'article_id',
