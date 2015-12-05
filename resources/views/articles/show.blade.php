@@ -30,6 +30,9 @@
 
 @if (Auth::check())
     @if(config('frontend.allow_ajax_crud_requests'))
+
+        @include('articles._attach_ajax_to_star')
+
         <script>
         $( '.create-comment-form' ).on( 'submit', function(e) {
             e.preventDefault();

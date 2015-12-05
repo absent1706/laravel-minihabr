@@ -56,6 +56,5 @@
         @include('articles._star')
      </small>
    </li>
-{{--     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li> --}}
   </ul>
 </div>
