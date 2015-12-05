@@ -4,6 +4,20 @@
 
 # Release notes
 
+##v0.9
+Views, stars
+
+### Backend:
+1. + article views:
+ * automatically views increment when someone reads full article
+ * user can see view history on user page (user can only see own views; but admins can see views of all users)
+2. + adding stars to articles:
+ * AJAX star/unstar link
+ * user starred articles are displayed on user page
+
+### Refactoring:
+1. confirm deleting category on category management page
+
 ## v0.8
 User follows feature
 
