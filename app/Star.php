@@ -26,6 +26,8 @@ class Star extends Model {
         return $this->belongsTo('App\Article');
     }
 
+    // Laravel tries to automatically set 'updated_at', but this model doesn't have updated_at field
+    // that's why below hack is needed
     public function setUpdatedAtAttribute($value)
     {
         // Do nothing.
