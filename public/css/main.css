@@ -85,7 +85,7 @@ footer {
 }
 
 .list-inline.list-inline-dashed > li {
-  border-right: 1px solid #333;
+  border-right: 1px solid #ccc;
 }
 .list-inline.list-inline-dashed > li:last-child {
   border-right: none;

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use App\Article;
 use App\Category;
+use App\View;
 
 use Config;
 
@@ -27,8 +28,8 @@ class ArticlesController extends Controller
         $articles = Article::with(['user','category', 'comments']);
 
         $sort = Request::get('sort');
-        if ($sort == 'most-commented') $articles = $articles->mostCommented();
-        // elseif ($sort == 'most-viewed')    $articles = $articles->mostViewed();
+        if ($sort == 'most-commented')  $articles = $articles->mostCommented();
+        elseif ($sort == 'most-viewed') $articles = $articles->mostViewed();
         // elseif ($sort == 'most-rated')     $articles = $articles->mostRated();
         else {
             $sort = '';
@@ -80,6 +81,9 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+
+        $view = new View(['user_id' => Auth::check() ? Auth::user()->id : null]) ;
+        $article->views()->save($view);
         return view('articles.show', compact('article'));
     }
 

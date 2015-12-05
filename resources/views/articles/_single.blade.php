@@ -37,7 +37,6 @@
   @endif
 
   <ul class="list-inline list-inline-dashed article-details">
-{{--     <li><small><span class="glyphicon glyphicon-eye-open"></span>8</small></li> --}}
     <li>
       <small>
         <a href="{{ route('articles.show', [$article->id]).'#comments' }}" title="View comments">
@@ -46,6 +45,12 @@
         </a>
       </small>
     </li>
+   <li>
+     <small>
+         <span class="glyphicon glyphicon-eye-open"></span>
+         <span>{{ $article->views->count() }}</span>
+     </small>
+   </li> 
 {{--     <li><small><a href="#" title="Add to favorites"><span class="glyphicon glyphicon-star"></span></a>2</small></li> --}}
   </ul>
 </div>

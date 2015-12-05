@@ -31,11 +31,18 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
-    // public function scopeMostViewed($query)
-    // {
-    //     // HARDCODE
-    //     return $query->orderBy('created_at', 'desc');
-    // }
+    public function views()
+    {
+        return $this->hasMany('App\View');
+    }
+
+    public function scopeMostViewed($query)
+    {
+        return $query->select(\Illuminate\Support\Facades\DB::raw('articles.*, COUNT(views.article_id) as views_count_aggregated'))
+            ->leftJoin('views', 'views.article_id' , '=', 'articles.id')
+            ->groupBy('articles.id')
+        ->orderBy(\Illuminate\Support\Facades\DB::raw('COUNT(views.article_id)'), 'desc');
+    }
 
     public function scopeMostCommented($query)
     {
