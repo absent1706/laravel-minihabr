@@ -107,3 +107,5 @@ Route::group(['middleware' => 'auth'], function()
     Route::delete('articles/{articles}/stars', ['as' => 'articles.stars.destroy', 'uses' => 'ArticleStarsController@destroy']);
 });
 
+// activity
+Route::resource('users.activity', 'UserActivityController', ['only' => 'index']);

@@ -94,4 +94,15 @@ class User extends Model implements AuthenticatableContract,
         return (bool)$this->followers()->find($user->id);
     }
 
+    /**
+     * Get the activity timeline for the user.
+     *
+     * @return mixed
+     */
+    public function activity()
+    {
+        return $this->hasMany('App\Activity')
+            ->with(['user', 'subject'])
+            ->latest();
+    }
 }

@@ -10,6 +10,14 @@ use App\Traits\Filterable;
 class Comment extends Model {
 
     use Filterable;
+    use Traits\RecordsActivity;
+
+    /**
+     * Which events to record for the auth'd user.
+     *
+     * @var array
+     */
+    protected static $recordEvents = ['created'];
 
     protected $fillable = [
         'body',

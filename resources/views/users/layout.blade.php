@@ -17,6 +17,7 @@
 <?php isset($active_page) ?: $active_page = 'profile' ?>
 <ul class="nav nav-pills nav-justified link-list-justified">
     <li class="{{ ($active_page == 'profile')          ? 'active' : '' }}"><a href="{{ route('users.show',                   $user->id) }}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+    <li class="{{ ($active_page == 'activity')         ? 'active' : '' }}"><a href="{{ route('users.activity.index',         $user->id) }}"><span class="glyphicon glyphicon-bullhorn"></span>Activity</a></li>
     <li class="{{ ($active_page == 'articles')         ? 'active' : '' }}"><a href="{{ route('users.articles.index',         $user->id) }}"><span class="glyphicon glyphicon-pencil"></span>Articles</a></li>
     <li class="{{ ($active_page == 'comments')         ? 'active' : '' }}"><a href="{{ route('users.comments.index',         $user->id) }}"><span class="glyphicon glyphicon-comment"></span>Comments</a></li>
     <li class="{{ ($active_page == 'followers')        ? 'active' : '' }}"><a href="{{ route('users.followers.index',        $user->id) }}"><span class="glyphicon glyphicon-arrow-right"></span><span class="glyphicon glyphicon-user"></span>Followers</a></li>

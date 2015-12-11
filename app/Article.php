@@ -10,6 +10,15 @@ class Article extends Model
 {
     use Filterable;
 
+    use Traits\RecordsActivity;
+
+    /**
+     * Which events to record for the auth'd user.
+     *
+     * @var array
+     */
+    protected static $recordEvents = ['created', 'updated'];
+
     protected $fillable = [
         'title',
         'body',
