@@ -6,14 +6,7 @@
   <ul class="list-unstyled list-split-hr">
     @foreach ($comments as $comment)
       <li>
-        <div class="row">
-          <div class="col-md-2">
-              <h5 class='no-margin-top'>{!! link_to_route('articles.show', $comment->article->title, $comment->article->id) !!}</h5>
-          </div>
-          <div class="col-md-10">
-              @include('comments._single')
-          </div>
-        </div>
+        @include('comments._single._with_article_title')
       </li>
     @endforeach
   </ul>

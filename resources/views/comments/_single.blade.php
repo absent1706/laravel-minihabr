@@ -6,7 +6,10 @@
             </a>
             <div class="media-body">
                 {!! link_to_route('users.show', $comment->user->name, $comment->user->id) !!}
-                <small class="created-date">{{ $comment->created_at->diffForHumans() }}</small>
+                <div class="descriptive-header">
+                    {{ $comment->created_at->diffForHumans() }}
+                    @yield('comment_title_end_before')
+                </div>
 
                 @if (can_manage_comment($comment))
                     <div class="pull-right">
