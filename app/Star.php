@@ -16,6 +16,16 @@ class Star extends Model {
         'user_id'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($star)
+        {
+            $star->article->recordActivity('starred');
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

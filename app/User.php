@@ -77,6 +77,13 @@ class User extends Model implements AuthenticatableContract,
     public function follow($user)
     {
         $this->followed_users()->attach($user->id, ['created_at' => Carbon::now()]);
+
+        Activity::create([
+            'subject_id'   => $user->id,
+            'subject_type' => get_class($user),
+            'name'         => 'followed_users',
+            'user_id'      => $this->id
+        ]);
     }
 
     public function unfollow($user)
