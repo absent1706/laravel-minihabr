@@ -4,6 +4,14 @@
 
 # Release notes
 
+##v0.10
++ user public activity.
+Show on user public activity section (on user page) next:
+* user comments creation
+* article create and update
+* user follows
+* starring articles
+
 ##v0.9
 Views, stars
 
